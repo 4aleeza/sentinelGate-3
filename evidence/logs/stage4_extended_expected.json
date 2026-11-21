@@ -1,0 +1,16 @@
+{
+  "ban_starts": 1,
+  "ban_expiries": 1,
+  "upstream_errors": 1,
+  "outage_status": "502 or 504",
+  "ban_bad_signature_requests": 4,
+  "post_expiry_requests": 1,
+  "outage_requests": 1,
+  "latency_count": 8,
+  "latency_api_decisions": 7,
+  "latency_baseline_monitor_decisions": 1,
+  "final_status_200": 2,
+  "final_status_401": 3,
+  "final_status_403": 2,
+  "final_status_502": 1
+}

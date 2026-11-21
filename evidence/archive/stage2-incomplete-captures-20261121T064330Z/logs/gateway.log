@@ -1,0 +1,125 @@
+COMMAND: date -u
+Sat Nov 21 06:42:14 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers
+INFO:     Started server process [94]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"request_id": "7a074ad26593433089747be5947d93e7", "client_ip": "10.10.3.10", "method": "GET", "path": "/health", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.3.10:35694 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "d62f795bcaa741d79365132826b303c0", "client_ip": "10.10.1.10", "method": "GET", "path": "/health", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.1.10:60466 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "1a4650d71d2f4fb6b9c3291e4eb7cf01", "client_ip": "10.10.1.10", "method": "GET", "path": "/ready", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.1.10:60480 - "GET /ready HTTP/1.1" 200 OK
+{"request_id": "cccb2badb6d14c729b5cee559444e17a", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 10.16463000269141}
+INFO:     10.10.1.10:60492 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "0ee630d418f14f258292e135d0367896", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 8.009743003640324}
+INFO:     10.10.1.10:60508 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "8215a9d8c8fa4470b12bdb844c96125b", "client_ip": "10.10.1.10", "method": "POST", "path": "/api/echo", "status": 200, "upstream_latency_ms": 10.073514000396244}
+INFO:     10.10.1.10:60518 - "POST /api/echo HTTP/1.1" 200 OK
+{"request_id": "29938621ec6c4fcc9758fb7080669fe7", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 301.6493180039106}
+INFO:     10.10.1.10:60532 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "29663fa857ab412bb50260c8e62b0944", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 404.64266399794724}
+INFO:     10.10.1.10:60554 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "156cf9ab8be34dd48c1244cc2abd383d", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 407.436367997434}
+INFO:     10.10.1.10:60570 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "df0eafbda4ba4e21a66fc850f12181a5", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 410.8076739939861}
+INFO:     10.10.1.10:60558 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "05b7b1ec85a44bb299045342514f5129", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 411.1094289983157}
+INFO:     10.10.1.10:60582 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9d0d71cdfac54cf2a1221b60d8a84042", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 437.8665470139822}
+INFO:     10.10.1.10:60548 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "adc19b60813a4bc7a71086c9e70e3bab", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 417.7748289948795}
+INFO:     10.10.1.10:60592 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "20baa9decebc46259c6fffdaa1375e61", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 421.57621300430037}
+INFO:     10.10.1.10:60618 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "699545da36974ff5880da70e4a56b1c7", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 418.45855199790094}
+INFO:     10.10.1.10:60634 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9d2797fb5c3940cb818e594218499b5a", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 428.19190499722026}
+INFO:     10.10.1.10:60598 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "d9fac85c17f94f939b070c605a118fcc", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 436.72954200883396}
+INFO:     10.10.1.10:60638 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "1aeb003d2a6349fa94914f15c8ffd5f3", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 442.66591098858044}
+INFO:     10.10.1.10:60632 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "5b56a9e6e1734f31aacd5bfde41a1da2", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 457.4858790001599}
+INFO:     10.10.1.10:60606 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "36c817dd69c14bd7aab6404d68d7fef1", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 452.3331519885687}
+INFO:     10.10.1.10:60642 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "fd7a5e604d11451e8ecc1b07364abd33", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 451.2755610048771}
+INFO:     10.10.1.10:60646 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "270efc23c6ec48118058714e33f1bf54", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 450.0855469959788}
+INFO:     10.10.1.10:60656 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "05364f5096d14d1db44e46bc9d5a4bee", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 453.2332140079234}
+INFO:     10.10.1.10:60660 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "2f1002b3253e48ee8a43138d462b9d46", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 458.9392409980064}
+INFO:     10.10.1.10:60704 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "56d0de2d591f4f3492349890a9676503", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 454.3210099946009}
+INFO:     10.10.1.10:60730 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "3353d213ff484e4eabb3e2fd45101cb9", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 452.6237050013151}
+INFO:     10.10.1.10:60734 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "773af5de0ce749899a7fa8f955b871e8", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 451.49160000437405}
+INFO:     10.10.1.10:60748 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "2d5c9caf0c5745d19ab5562a712a8b06", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 450.0717449991498}
+INFO:     10.10.1.10:60762 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "edac6b44bdc54ea7a2eadf2e91f62433", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 455.3092879941687}
+INFO:     10.10.1.10:60770 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9fc20a815ffe484086f3c5ebe0f67962", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 484.192289004568}
+INFO:     10.10.1.10:60662 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "e4509d5c591646a28b3537e3a5419cb5", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 483.3081300021149}
+INFO:     10.10.1.10:60668 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f411b1e91b2b47ea82e810b4ab3a68ed", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 481.8432650063187}
+INFO:     10.10.1.10:60678 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "8d15519fd3604a14b117c73c0ad1375e", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 457.9265590000432}
+INFO:     10.10.1.10:60778 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "7fac751da0fe46ac82ee151cdd28073b", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 481.74404799647164}
+INFO:     10.10.1.10:60692 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "4cc82273fec642a194c448a1b4b813dc", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 477.31144999852404}
+INFO:     10.10.1.10:60718 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "89080957dc8a4a36aed95b23a231c95f", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 473.0727869900875}
+INFO:     10.10.1.10:60782 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9b9251aa1df8467f8ac3d0ccad7cb3e5", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 455.89379299781285}
+INFO:     10.10.1.10:60850 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "694cf47db745417ca3249eeeae407145", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 452.97126700461376}
+INFO:     10.10.1.10:60862 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "a9a2797d8bd24e57a99c257bdc19f317", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 451.66213100310415}
+INFO:     10.10.1.10:60864 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "0832830f24754681aa976dea675da494", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 450.49132000713143}
+INFO:     10.10.1.10:60872 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f3215e6fa46a417aa9778f5a9d38226b", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 449.39362299919594}
+INFO:     10.10.1.10:60878 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "19e04d7f6195440382dcc2a90e59b11e", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 448.61238199518993}
+INFO:     10.10.1.10:60886 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f1d8a762bf6f4e6e886da59426fc9a43", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 446.13083500007633}
+INFO:     10.10.1.10:60894 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "b345ed6753434664940456681fe2ec5d", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 456.0686249897117}
+INFO:     10.10.1.10:60906 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "99e83f2df6d14191bed319c62ee56441", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 455.3578969935188}
+INFO:     10.10.1.10:60914 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "67401a5118184b6ea15e3ac81dcda4b7", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 454.41952798864804}
+INFO:     10.10.1.10:60926 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "ccfc19d38e3d4e518e921b2439bdc3e3", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 532.9814739961876}
+INFO:     10.10.1.10:60784 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "b3071f12044144f8b84f18355ff91fc9", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 531.0664300050121}
+INFO:     10.10.1.10:60790 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "ac8ee90b91b44c4f8530bb8073319e4c", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 524.8755150096258}
+INFO:     10.10.1.10:60798 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "0a430319b3dc4cd8b6b0d4fc720cd091", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 531.0755310056265}
+INFO:     10.10.1.10:60794 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "3014135a9cd9458795cbc5e334d03b55", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 520.8511899982113}
+INFO:     10.10.1.10:60816 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "6673b705d0e24ef681650908ed6575f1", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 515.5047269945499}
+INFO:     10.10.1.10:60838 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "917b6356c1c94dfc8404e5e1acf58355", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 515.2549829945201}
+INFO:     10.10.1.10:60842 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "27cc3cd1c6e9406c830af26c00504130", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 514.4994459988084}
+INFO:     10.10.1.10:60846 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "426b162fe0dc4a6589b6094f2300d52c", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 533.2279189897235}
+INFO:     10.10.1.10:60800 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "59fb3f1bc68d454e8a2f19794dc5d660", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/slow", "status": 200, "upstream_latency_ms": 527.157325996086}
+INFO:     10.10.1.10:60830 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "1d77e6ef2dcf4931a8138fc929b4fd8b", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 10.468050008057617}
+INFO:     10.10.1.10:60940 - "GET /api/info HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [94]

@@ -1,0 +1,5 @@
+COMMAND: date -u
+Sat Nov 21 13:46:42 UTC 2026
+COMMAND: python -m pytest -q -p no:cacheprovider tests/test_risk_state.py tests/test_security.py tests/test_triggering_ban.py tests/test_security_adapter.py
+....................................................................     [100%]
+68 passed in 10.74s

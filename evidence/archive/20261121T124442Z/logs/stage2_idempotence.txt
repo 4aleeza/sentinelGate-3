@@ -1,0 +1,176 @@
+COMMAND: date -u
+Sat Nov 21 06:44:52 UTC 2026
+COMMAND: bash scripts/stage2_up.sh
+Topology created.
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 2 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+backend healthy
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 5 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+gateway healthy
+COMMAND: bash scripts/stage2_up.sh repeat
+COMMAND: date -u
+Sat Nov 21 06:44:58 UTC 2026
+COMMAND: ip -n sg-client address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+3: sg-c0@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 46:86:1b:c4:27:1b brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.1.10/24 scope global sg-c0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4486:1bff:fec4:271b/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-client route show
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+COMMAND: ip -n sg-r1 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: sg-r10@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether a2:95:31:09:1c:1e brd ff:ff:ff:ff:ff:ff link-netns sg-client
+    inet 10.10.1.1/24 scope global sg-r10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a095:31ff:fe09:1c1e/64 scope link 
+       valid_lft forever preferred_lft forever
+5: sg-r11@if4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether de:2f:ad:5b:ed:15 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.2.1/24 scope global sg-r11
+       valid_lft forever preferred_lft forever
+    inet6 fe80::dc2f:adff:fe5b:ed15/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r1 route show
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+COMMAND: ip -n sg-r2 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+4: sg-r20@if5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 92:85:a0:d6:aa:46 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.2.2/24 scope global sg-r20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::9085:a0ff:fed6:aa46/64 scope link 
+       valid_lft forever preferred_lft forever
+7: sg-r21@if6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8a:c6:e9:86:3d:e5 brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.3.1/24 scope global sg-r21
+       valid_lft forever preferred_lft forever
+    inet6 fe80::88c6:e9ff:fe86:3de5/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r2 route show
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+COMMAND: ip -n sg-gateway address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+6: sg-g0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether f2:79:c9:26:8a:19 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.3.10/24 scope global sg-g0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f079:c9ff:fe26:8a19/64 scope link 
+       valid_lft forever preferred_lft forever
+9: sg-g1@if8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether a2:32:30:02:27:31 brd ff:ff:ff:ff:ff:ff link-netns sg-backend
+    inet 10.10.4.1/24 scope global sg-g1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a032:30ff:fe02:2731/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-gateway route show
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+COMMAND: ip -n sg-backend address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+8: sg-b0@if9: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 2e:81:de:73:fd:ba brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.4.10/24 scope global sg-b0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2c81:deff:fe73:fdba/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-backend route show
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client ping -c 3 -W 2 10.10.3.10
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=1.71 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.065 ms
+64 bytes from 10.10.3.10: icmp_seq=3 ttl=62 time=0.147 ms
+
+--- 10.10.3.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2026ms
+rtt min/avg/max/mdev = 0.065/0.639/1.707/0.755 ms
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 2 10.10.3.10
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  1.088 ms
+ 2  10.10.2.2  0.819 ms
+ 3  10.10.3.10  0.085 ms
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.4.10 (failure expected)
+PING 10.10.4.10 (10.10.4.10) 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+From 10.10.1.1 icmp_seq=2 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1015ms
+
+PASS: backend did not respond to ping.
+Topology verification passed.
+Existing topology verified; no changes made.
+backend already running; checking health
+backend healthy
+gateway already running; checking health
+gateway healthy
+COMMAND: bash scripts/stage2_down.sh
+sg-gateway port 8000 free
+sg-backend port 9000 free
+COMMAND: bash scripts/stage2_down.sh repeat
+sg-gateway port 8000 free
+sg-backend port 9000 free
+COMMAND: bash scripts/topo_down.sh
+Project namespaces removed or already absent.
+COMMAND: ip netns list
+COMMAND: ip -o link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000\    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00

@@ -1,0 +1,20 @@
+COMMAND: docker run --rm -v C:\CN-SentinelGate-3:/work -w /work sentinelgate:latest bash -c pytest
+COMMAND: date -u
+Sat Nov 21 19:44:21 UTC 2026
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.5, pluggy-1.7.0
+rootdir: /work
+configfile: pytest.ini
+testpaths: tests
+plugins: asyncio-0.26.0, anyio-4.16.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 104 items
+
+tests/test_apps.py ...........                                           [ 10%]
+tests/test_risk_state.py ......................                          [ 31%]
+tests/test_security.py ................................................. [ 78%]
+.............                                                            [ 91%]
+tests/test_security_adapter.py .......                                   [ 98%]
+tests/test_triggering_ban.py ..                                          [100%]
+
+============================= 104 passed in 3.05s ==============================

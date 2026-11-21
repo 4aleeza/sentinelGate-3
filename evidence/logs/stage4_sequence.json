@@ -1,0 +1,289 @@
+[
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "33775333b3c74baeb4426157234f45f0"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "ab538c5a32b64df89877babe0cac5bd0"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "7fb8c7b1bead4e3ba01d12dcb7d3580e"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "8dca65ffbfba402b984dda095f744533"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "5749889b289e4ac9b4651dd5e3510e7b"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "2de7fb0d6e5b4e81bf764e10be8b0e45"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "2b7a7821a4134ea68d0e5e22dd859a73"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "00a3ca9c7a334d739449ef88a9a552bc"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "7a314b705b48499d93dd6956c8852bb5"
+  },
+  {
+    "source": "10.10.1.11",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "7a58efcfd1f94f3badb2ce6fd85c3a3d"
+  },
+  {
+    "source": "10.10.1.12",
+    "path": "/api/info",
+    "variant": null,
+    "status": 401,
+    "request_id": "28b2eafa672f4bd1afd7d67cdab72fc1"
+  },
+  {
+    "source": "10.10.1.12",
+    "path": "/api/info",
+    "variant": null,
+    "status": 401,
+    "request_id": "0125c0a816c24898903ebf29fadcbe3b"
+  },
+  {
+    "source": "10.10.1.12",
+    "path": "/api/info",
+    "variant": null,
+    "status": 401,
+    "request_id": "7d3a85f92c7b42a6838b01976576e907"
+  },
+  {
+    "source": "10.10.1.13",
+    "path": "/api/info",
+    "variant": "wrong-signature",
+    "status": 401,
+    "request_id": "890ec98f4e8e4a288824aa3e9c07d273"
+  },
+  {
+    "source": "10.10.1.13",
+    "path": "/api/info",
+    "variant": "wrong-signature",
+    "status": 401,
+    "request_id": "0408888b9a6843f8bb3bdc0c044335ee"
+  },
+  {
+    "source": "10.10.1.14",
+    "path": "/api/%2e%2e/info",
+    "variant": "valid",
+    "status": 400,
+    "request_id": "611bcc3933ac4e539a14e24ef7019613"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "3686b6ff50a641249552d5377d4e6f87"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "20f7ebac7e7844299a39c83013483db6"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "9ff12867bf924c9d98eece8bca04b42e"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "a8be7463127c4fc599684816166a6fb2"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "aec1496b254a4ab8af4fc4bbdae24f1f"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "0316a071859846ef973a9e445fc6bf32"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "ecbfdfe84b474a8c8856336a6f6d94dd"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "62745907eb3149b9a5e38b4f27e30f05"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "f6732346d7e3495b9f5ee9c5a9f44f63"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "180be8488f984a43a74aa206d9b37212"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "1774abd6e83b43e98833d01137b63c6b"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "ee69981088994144943f5f153d5632e5"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "cc17a2c1aca9426b840dcdcbf1aec19c"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "a639a743afc545d6996c4149831cd8d3"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "da9035e5601348cb8e767167778def43"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "a0ade6531ffa4c9f89c1ffe9cfaa1a3d"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "81f81a92cde84c249832ae92a498866a"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "304e385a049444af9da67fb61b1f83c5"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "b1fc19edc84347c5869f984ab300e3b8"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 200,
+    "request_id": "9df5773da92844cba6377121d36439da"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 429,
+    "request_id": "b509c477c1594e9a894e4c6a877ea128"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 429,
+    "request_id": "ba37501a39e841b492e84b619fdeec9b"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 429,
+    "request_id": "6a6859d2bcab4e6ebd68f5f321e2f24c"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 429,
+    "request_id": "3b77e37865ac4fa8b21512aafa86095c"
+  },
+  {
+    "source": "10.10.1.15",
+    "path": "/api/info",
+    "variant": "valid",
+    "status": 429,
+    "request_id": "7af1dca6fe534849a5838f2a81c30d37"
+  }
+]

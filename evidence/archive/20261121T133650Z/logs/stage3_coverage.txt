@@ -1,0 +1,17 @@
+COMMAND: date -u
+Sat Nov 21 13:06:14 UTC 2026
+COMMAND: coverage-run-branch-pytest
+/opt/venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:217: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+....................................................................     [100%]
+68 passed in 9.42s
+COMMAND: coverage-report-missing
+Name                         Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------
+gateway/risk_state.py           84      0     30      1    99%   66->68
+gateway/security.py            171     10     56      2    95%   44, 56-57, 88, 92, 102-104, 174, 206
+gateway/security_config.py      54     10      6      0    73%   49-62
+------------------------------------------------------------------------
+TOTAL                          309     20     92      3    93%

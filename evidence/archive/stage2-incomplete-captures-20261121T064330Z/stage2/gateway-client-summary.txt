@@ -1,0 +1,5 @@
+COMMAND: date -u
+Sat Nov 21 06:42:31 UTC 2026
+COMMAND: tshark -r evidence/captures/stage2/gateway-client.pcapng -T fields [specified protocol fields]
+Running as user "root" and group "root". This could be dangerous.
+frame.time,ip.src,ip.dst,ip.ttl,tcp.srcport,tcp.dstport,tcp.stream,tcp.flags,http.request.method,http.request.uri,http.response.code

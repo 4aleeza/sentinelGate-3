@@ -1,0 +1,17 @@
+COMMAND: tshark -r /work/evidence/captures/stage3/backend-cases.pcapng -T fields -E header=y -e frame.time -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e tcp.stream -e tcp.flags -e http.request.method -e http.request.uri -e http.response.code
+UTC: 2026-11-21T20:36:52.215659+00:00
+frame.time	ip.src	ip.dst	tcp.srcport	tcp.dstport	tcp.stream	tcp.flags	http.request.method	http.request.uri	http.response.code
+Nov 21, 2026 20:36:51.120676795 UTC	10.10.4.1	10.10.4.10	51753	9000	0	0x0002			
+Nov 21, 2026 20:36:51.120698398 UTC	10.10.4.10	10.10.4.1	9000	51753	0	0x0012			
+Nov 21, 2026 20:36:51.120756608 UTC	10.10.4.1	10.10.4.10	51753	9000	0	0x0010			
+Nov 21, 2026 20:36:51.123160210 UTC	10.10.4.1	10.10.4.10	51753	9000	0	0x0018	GET	/api/info	
+Nov 21, 2026 20:36:51.123227221 UTC	10.10.4.10	10.10.4.1	9000	51753	0	0x0010			
+Nov 21, 2026 20:36:51.171031211 UTC	10.10.4.10	10.10.4.1	9000	51753	0	0x0018			
+Nov 21, 2026 20:36:51.171160933 UTC	10.10.4.1	10.10.4.10	51753	9000	0	0x0010			
+Nov 21, 2026 20:36:51.172339930 UTC	10.10.4.10	10.10.4.1	9000	51753	0	0x0018			200
+Nov 21, 2026 20:36:51.172362634 UTC	10.10.4.1	10.10.4.10	51753	9000	0	0x0010			
+Running as user "root" and group "root". This could be dangerous.
+COMMAND: tshark -r /work/evidence/captures/stage3/backend-cases.pcapng -Y frame.time_epoch >= 1795293410.9152184 && frame.time_epoch <= 1795293411.261076 && ip.dst == 10.10.4.10 && tcp.dstport == 9000 -T fields -e frame.number
+SC-01 packet count: 5
+COMMAND: tshark -r /work/evidence/captures/stage3/backend-cases.pcapng -Y frame.time_epoch >= 1795293411.6001549 && frame.time_epoch <= 1795293411.7467265 && ip.dst == 10.10.4.10 && tcp.dstport == 9000 -T fields -e frame.number
+SC-04 packet count: 0

@@ -1,0 +1,342 @@
+COMMAND: date -u
+Sat Nov 21 20:38:12 UTC 2026
+Overrides: SG_BAN_BASE_SECONDS=10 SG_BUCKET_REFILL_PER_SECOND=0.001
+COMMAND: bash scripts/stage2_up.sh
+Topology created.
+backend listening
+gateway healthy
+COMMAND: ip netns exec sg-client python scripts/stage3_cases.py
+{"case": "SC-01", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.11", "expected_status": 200, "expected_reason": "allowed", "expected_backend": true, "utc": "2026-11-21T20:38:18.839660+00:00", "request_id": "978971ddc37d4e80b9e848708f3c82fe", "status": 200, "reason": "allowed", "score_before": 0.0, "score_after": 0.0, "client_ip": "10.10.1.11", "backend_before": 0, "backend_after": 1, "backend_reached": true, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-02", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.12", "expected_status": 401, "expected_reason": "missing_token", "expected_backend": false, "utc": "2026-11-21T20:38:19.039906+00:00", "request_id": "8e7392a8be8c49f9a638b1975e0c1563", "status": 401, "reason": "missing_token", "score_before": 0.0, "score_after": 5.0, "client_ip": "10.10.1.12", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-03", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.13", "expected_status": 401, "expected_reason": "expired_token", "expected_backend": false, "utc": "2026-11-21T20:38:19.184045+00:00", "request_id": "9ac8aa7214f5401583a6fca1ef5d002a", "status": 401, "reason": "expired_token", "score_before": 0.0, "score_after": 5.0, "client_ip": "10.10.1.13", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-04", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.14", "expected_status": 401, "expected_reason": "bad_signature", "expected_backend": false, "utc": "2026-11-21T20:38:19.383803+00:00", "request_id": "a1908d59daa841a2b475d798b3addad6", "status": 401, "reason": "bad_signature", "score_before": 0.0, "score_after": 20.0, "client_ip": "10.10.1.14", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-05", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.15", "expected_status": 401, "expected_reason": "bad_algorithm", "expected_backend": false, "utc": "2026-11-21T20:38:20.536331+00:00", "request_id": "5111d8f3a0774b82be4965d04f606442", "status": 401, "reason": "bad_algorithm", "score_before": 0.0, "score_after": 40.0, "client_ip": "10.10.1.15", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "elevated", "pass": true}
+{"case": "SC-06", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.16", "expected_status": 401, "expected_reason": "bad_claims", "expected_backend": false, "utc": "2026-11-21T20:38:20.671921+00:00", "request_id": "0b1cbd60497c49da95ef23160953e4f0", "status": 401, "reason": "bad_claims", "score_before": 0.0, "score_after": 10.0, "client_ip": "10.10.1.16", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-07", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.17", "expected_status": 403, "expected_reason": "insufficient_scope", "expected_backend": false, "utc": "2026-11-21T20:38:20.796281+00:00", "request_id": "12192f2ea50d42dd92a6a03e73864d9b", "status": 403, "reason": "insufficient_scope", "score_before": 0.0, "score_after": 5.0, "client_ip": "10.10.1.17", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-08", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.18", "expected_status": 400, "expected_reason": "bad_path", "expected_backend": false, "utc": "2026-11-21T20:38:21.000744+00:00", "request_id": "82d6209992234456ba35887940ff888a", "status": 400, "reason": "bad_path", "score_before": 0.0, "score_after": 10.0, "client_ip": "10.10.1.18", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-09", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.19", "expected_status": 415, "expected_reason": "bad_content_type", "expected_backend": false, "utc": "2026-11-21T20:38:21.144693+00:00", "request_id": "5a782ae68bca40d4b3b3bbb3879ba56b", "status": 415, "reason": "bad_content_type", "score_before": 0.0, "score_after": 10.0, "client_ip": "10.10.1.19", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-10", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.20", "expected_status": 413, "expected_reason": "body_too_large", "expected_backend": false, "utc": "2026-11-21T20:38:21.283233+00:00", "request_id": "66a6acc427334e98928ac76afa4aa4f4", "status": 413, "reason": "body_too_large", "score_before": 0.0, "score_after": 10.0, "client_ip": "10.10.1.20", "backend_before": 1, "backend_after": 1, "backend_reached": false, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-11", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.21", "expected_status": 429, "expected_reason": "rate_limited", "expected_backend": false, "utc": "2026-11-21T20:38:24.574327+00:00", "request_id": "fec2b8064017480cad8dc31843db1908", "status": 429, "reason": "rate_limited", "score_before": 0.0, "score_after": 5.0, "client_ip": "10.10.1.21", "backend_before": 21, "backend_after": 21, "backend_reached": false, "retry_after": "997", "tier": "normal", "pass": true}
+{"case": "SC-12", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.22", "expected_status": 403, "expected_reason": "banned", "expected_backend": false, "utc": "2026-11-21T20:38:25.341591+00:00", "request_id": "37b0e6c26a0f423ab92ae3d2c74fd8b7", "status": 403, "reason": "banned", "score_before": 79.80357358250058, "score_after": 79.80357358250058, "client_ip": "10.10.1.22", "backend_before": 21, "backend_after": 21, "backend_reached": false, "retry_after": "10", "tier": "banned", "pass": true}
+SC-13 ban observation: {"utc": "2026-11-21T20:38:26.198208+00:00", "request_id": "77db00c997f54ac0bfd3fc7a6801679d", "status": 403, "reason": "banned", "score_before": 79.7352499284998, "score_after": 79.7352499284998, "client_ip": "10.10.1.23", "backend_before": 21, "backend_after": 21, "backend_reached": false, "retry_after": "10", "tier": "banned"}
+{"case": "SC-13", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.23", "expected_status": 200, "expected_reason": "allowed", "expected_backend": true, "utc": "2026-11-21T20:38:37.349885+00:00", "request_id": "b27cfee4f68e44a1bdf3c5a14122ba63", "status": 200, "reason": "allowed", "score_before": 29.357130227000198, "score_after": 29.357130227000198, "client_ip": "10.10.1.23", "backend_before": 21, "backend_after": 22, "backend_reached": true, "retry_after": "", "tier": "normal", "pass": true}
+{"case": "SC-14", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.24", "expected_status": 200, "expected_reason": "allowed", "expected_backend": true, "utc": "2026-11-21T20:39:22.998077+00:00", "request_id": "bf56c95d8ff5472d83541c93fdcd03c3", "status": 200, "reason": "allowed", "score_before": 37.28388704150029, "score_after": 37.28388704150029, "client_ip": "10.10.1.24", "backend_before": 22, "backend_after": 23, "backend_reached": true, "retry_after": "", "tier": "normal", "pass": true}
+SC-15 spoofed rejection: {"utc": "2026-11-21T20:39:23.184930+00:00", "request_id": "e566e500f59c4faeafe557abb289bf8a", "status": 401, "reason": "missing_token", "score_before": 0.0, "score_after": 5.0, "client_ip": "10.10.1.25", "backend_before": 23, "backend_after": 23, "backend_reached": false, "retry_after": "", "tier": "normal"}
+{"case": "SC-15", "command": "ip netns exec sg-client python scripts/stage3_cases.py", "source_ip": "10.10.1.25", "expected_status": 200, "expected_reason": "allowed", "expected_backend": true, "utc": "2026-11-21T20:39:23.312162+00:00", "request_id": "947e8d2bd8934a7288737dbe0e836c55", "status": 200, "reason": "allowed", "score_before": 4.936481120500048, "score_after": 4.936481120500048, "client_ip": "10.10.1.25", "backend_before": 23, "backend_after": 24, "backend_reached": true, "retry_after": "", "tier": "normal", "pass": true}
+COMMAND: bash scripts/sg-case-addresses.sh down
+COMMAND: bash scripts/stage2_down.sh
+sg-gateway port 8000 free
+sg-backend port 9000 free
+COMMAND: bash scripts/topo_down.sh
+Project namespaces removed or already absent.
+COMMAND: ip netns list; ip -o link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000\    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0@if69: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default \    link/ether 56:bb:9f:19:98:7e brd ff:ff:ff:ff:ff:ff link-netnsid 0
+COMMAND: bash scripts/run_stage1_checks.sh
+COMMAND: bash scripts/preflight.sh
+COMMAND: date -u
+Sat Nov 21 20:39:28 UTC 2026
+COMMAND: uname -a
+Linux b6b43b4e0727 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+COMMAND: ip netns add sg-preflight
+COMMAND: ip link add sg-p0 type veth peer name sg-p1
+COMMAND: tc qdisc add dev sg-p0 root netem loss 1%
+COMMAND: tc -s qdisc show dev sg-p0
+qdisc netem 8001: root refcnt 9 limit 1000 loss 1%
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+COMMAND: timeout 8 tcpdump -n -i sg-p0 -c 1 arp (then ping 10.99.0.2)
+PING 10.99.0.2 (10.99.0.2) 56(84) bytes of data.
+64 bytes from 10.99.0.2: icmp_seq=1 ttl=64 time=0.111 ms
+
+--- 10.99.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.111/0.111/0.111/0.000 ms
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on sg-p0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+20:39:29.752423 ARP, Request who-has 10.99.0.2 tell 10.99.0.1, length 28
+1 packet captured
+2 packets received by filter
+0 packets dropped by kernel
+Preflight passed.
+COMMAND: bash scripts/topo_up.sh
+Sat Nov 21 20:39:29 UTC 2026
+Topology created.
+COMMAND: bash scripts/verify_topo.sh
+COMMAND: date -u
+Sat Nov 21 20:39:30 UTC 2026
+COMMAND: ip -n sg-client address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: sg-c0@if13: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 22:64:47:8f:76:05 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.1.10/24 scope global sg-c0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2064:47ff:fe8f:7605/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-client route show
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+COMMAND: ip -n sg-r1 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: sg-r10@if14: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether c2:25:1d:a8:e7:cd brd ff:ff:ff:ff:ff:ff link-netns sg-client
+    inet 10.10.1.1/24 scope global sg-r10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c025:1dff:fea8:e7cd/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+16: sg-r11@if15: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 42:d5:5b:16:5a:dc brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.2.1/24 scope global sg-r11
+       valid_lft forever preferred_lft forever
+    inet6 fe80::40d5:5bff:fe16:5adc/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r1 route show
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+COMMAND: ip -n sg-r2 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+15: sg-r20@if16: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ea:59:33:dd:b6:50 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.2.2/24 scope global sg-r20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e859:33ff:fedd:b650/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+18: sg-r21@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 9a:ab:b8:bd:12:2e brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.3.1/24 scope global sg-r21
+       valid_lft forever preferred_lft forever
+    inet6 fe80::98ab:b8ff:febd:122e/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r2 route show
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+COMMAND: ip -n sg-gateway address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+17: sg-g0@if18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether b2:ba:9c:cd:a0:34 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.3.10/24 scope global sg-g0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::b0ba:9cff:fecd:a034/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+20: sg-g1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ae:22:db:c3:59:99 brd ff:ff:ff:ff:ff:ff link-netns sg-backend
+    inet 10.10.4.1/24 scope global sg-g1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::ac22:dbff:fec3:5999/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-gateway route show
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+COMMAND: ip -n sg-backend address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+19: sg-b0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 6a:95:e8:42:86:6c brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.4.10/24 scope global sg-b0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6895:e8ff:fe42:866c/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-backend route show
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client ping -c 3 -W 2 10.10.3.10
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=0.360 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.158 ms
+64 bytes from 10.10.3.10: icmp_seq=3 ttl=62 time=0.155 ms
+
+--- 10.10.3.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2049ms
+rtt min/avg/max/mdev = 0.155/0.224/0.360/0.095 ms
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 2 10.10.3.10
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  0.482 ms
+ 2  10.10.2.2  0.240 ms
+ 3  10.10.3.10  0.174 ms
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.4.10 (failure expected)
+PING 10.10.4.10 (10.10.4.10) 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+From 10.10.1.1 icmp_seq=2 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1003ms
+
+PASS: backend did not respond to ping.
+Topology verification passed.
+COMMAND: bash scripts/topo_up.sh (idempotence)
+COMMAND: date -u
+Sat Nov 21 20:39:34 UTC 2026
+COMMAND: ip -n sg-client address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: sg-c0@if13: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 22:64:47:8f:76:05 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.1.10/24 scope global sg-c0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2064:47ff:fe8f:7605/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-client route show
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+COMMAND: ip -n sg-r1 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: sg-r10@if14: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether c2:25:1d:a8:e7:cd brd ff:ff:ff:ff:ff:ff link-netns sg-client
+    inet 10.10.1.1/24 scope global sg-r10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c025:1dff:fea8:e7cd/64 scope link 
+       valid_lft forever preferred_lft forever
+16: sg-r11@if15: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 42:d5:5b:16:5a:dc brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.2.1/24 scope global sg-r11
+       valid_lft forever preferred_lft forever
+    inet6 fe80::40d5:5bff:fe16:5adc/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r1 route show
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+COMMAND: ip -n sg-r2 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+15: sg-r20@if16: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ea:59:33:dd:b6:50 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.2.2/24 scope global sg-r20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e859:33ff:fedd:b650/64 scope link 
+       valid_lft forever preferred_lft forever
+18: sg-r21@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 9a:ab:b8:bd:12:2e brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.3.1/24 scope global sg-r21
+       valid_lft forever preferred_lft forever
+    inet6 fe80::98ab:b8ff:febd:122e/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r2 route show
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+COMMAND: ip -n sg-gateway address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+17: sg-g0@if18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether b2:ba:9c:cd:a0:34 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.3.10/24 scope global sg-g0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::b0ba:9cff:fecd:a034/64 scope link 
+       valid_lft forever preferred_lft forever
+20: sg-g1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ae:22:db:c3:59:99 brd ff:ff:ff:ff:ff:ff link-netns sg-backend
+    inet 10.10.4.1/24 scope global sg-g1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::ac22:dbff:fec3:5999/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-gateway route show
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+COMMAND: ip -n sg-backend address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+19: sg-b0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 6a:95:e8:42:86:6c brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.4.10/24 scope global sg-b0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6895:e8ff:fe42:866c/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-backend route show
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client ping -c 3 -W 2 10.10.3.10
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=0.072 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.112 ms
+64 bytes from 10.10.3.10: icmp_seq=3 ttl=62 time=0.149 ms
+
+--- 10.10.3.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2052ms
+rtt min/avg/max/mdev = 0.072/0.111/0.149/0.031 ms
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 2 10.10.3.10
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  0.101 ms
+ 2  10.10.2.2  0.156 ms
+ 3  10.10.3.10  0.088 ms
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.4.10 (failure expected)
+PING 10.10.4.10 (10.10.4.10) 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+From 10.10.1.1 icmp_seq=2 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1001ms
+
+PASS: backend did not respond to ping.
+Topology verification passed.
+Existing topology verified; no changes made.
+COMMAND: bash scripts/topo_down.sh
+Sat Nov 21 20:39:37 UTC 2026
+Project namespaces removed or already absent.
+COMMAND: bash scripts/topo_down.sh (idempotence)
+Project namespaces removed or already absent.
+COMMAND: ip netns list; ip -o link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000\    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0@if69: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default \    link/ether 56:bb:9f:19:98:7e brd ff:ff:ff:ff:ff:ff link-netnsid 0
+Cleanup verification passed.

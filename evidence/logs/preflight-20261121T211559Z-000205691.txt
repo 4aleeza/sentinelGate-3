@@ -1,0 +1,26 @@
+COMMAND: bash scripts/preflight.sh
+COMMAND: date -u
+Sat Nov 21 21:15:59 UTC 2026
+COMMAND: uname -a
+Linux 0fa7841b1b8b 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+COMMAND: ip netns add sg-preflight
+COMMAND: ip link add sg-p0 type veth peer name sg-p1
+COMMAND: tc qdisc add dev sg-p0 root netem loss 1%
+COMMAND: tc -s qdisc show dev sg-p0
+qdisc netem 8003: root refcnt 9 limit 1000 loss 1%
+ Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0
+COMMAND: timeout 8 tcpdump -n -i sg-p0 -c 1 arp (then ping 10.99.0.2)
+PING 10.99.0.2 (10.99.0.2) 56(84) bytes of data.
+64 bytes from 10.99.0.2: icmp_seq=1 ttl=64 time=4.94 ms
+
+--- 10.99.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 4.936/4.936/4.936/0.000 ms
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on sg-p0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+21:16:00.278308 ARP, Request who-has 10.99.0.2 tell 10.99.0.1, length 28
+1 packet captured
+2 packets received by filter
+0 packets dropped by kernel
+Preflight passed.

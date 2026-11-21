@@ -1,0 +1,46 @@
+COMMAND: date -u
+Sat Nov 21 20:34:07 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers --forwarded-allow-ips '' --workers 1
+INFO:     Started server process [146]
+INFO:     Waiting for application startup.
+{"event": "security_config", "config": {"bucket_capacity": 20.0, "bucket_refill_per_second": 10.0, "elevated_factor": 0.5, "elevated_threshold": 40.0, "ban_threshold": 70.0, "score_max": 100.0, "decay_per_second": 0.5, "ban_base_seconds": 30.0, "ban_max_seconds": 240.0, "offence_memory_seconds": 600.0, "probation_score": 30.0, "max_ips": 10000, "idle_seconds": 900.0, "max_token_bytes": 4096, "max_claim_bytes": 256, "max_path_bytes": 256, "max_query_bytes": 512, "max_query_params": 20, "max_headers": 50, "max_header_value_bytes": 2048, "max_body_bytes": 65536, "max_path_pattern_chars": 200, "jwt_leeway_seconds": 5.0, "issuer": "sentinelgate-lab", "audience": "sentinelgate-api", "points_rate_limited": 5.0, "points_missing_token": 5.0, "points_malformed_token": 10.0, "points_expired_token": 5.0, "points_bad_claims": 10.0, "points_insufficient_scope": 5.0, "points_bad_request": 10.0, "points_bad_method": 10.0, "points_bad_path": 10.0, "points_bad_content_type": 10.0, "points_body_too_large": 10.0, "points_suspicious_pattern": 15.0, "points_bad_signature": 20.0, "points_bad_algorithm": 40.0}, "secret": "[redacted]"}
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"timestamp": "2026-11-21T20:34:09.515053+00:00", "request_id": "e9c0160f9f204bf0b9549d0314cf9e55", "client_ip": "10.10.1.250", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.250:51188 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:09.972756+00:00", "request_id": "24a252f539024d689d6793099ab882e8", "client_ip": "10.10.1.11", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.11:59918 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.066683+00:00", "request_id": "97f46e6bf6254158ad51ccf21bb9d91e", "client_ip": "10.10.1.12", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.12:40478 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.144860+00:00", "request_id": "56d7c735ca12476bba11b8ff313ee9a6", "client_ip": "10.10.1.13", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.13:39904 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.174592+00:00", "request_id": "3d76366668be43179d91d89200cdda26", "client_ip": "10.10.1.14", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.14:41034 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.198431+00:00", "request_id": "22be43108285445780bf219fe9b2445f", "client_ip": "10.10.1.15", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.15:47420 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.225031+00:00", "request_id": "4ec473f98e7a4fa882b9661a27e1c847", "client_ip": "10.10.1.16", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.16:46898 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.251133+00:00", "request_id": "b9eb92c00823481e8a8b52d9e2146bab", "client_ip": "10.10.1.17", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.17:34408 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.279501+00:00", "request_id": "0263f7573bdd4390a871027d08fdfa67", "client_ip": "10.10.1.18", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.18:36594 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.304349+00:00", "request_id": "4833df694adb4ad9bd4d7deff6b52bf0", "client_ip": "10.10.1.19", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.19:35196 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.334254+00:00", "request_id": "030406c006d84832abc090a3785863a6", "client_ip": "10.10.1.20", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.20:55046 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.359817+00:00", "request_id": "dba5ee9a0b8146bd9e32bed104c7e917", "client_ip": "10.10.1.21", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:44634 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.385073+00:00", "request_id": "8235ac5f5f4d4046a8f038cf0c59ebc6", "client_ip": "10.10.1.22", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.22:33078 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.414375+00:00", "request_id": "4aeb2898409c4c6fb07f5052ac7f303d", "client_ip": "10.10.1.23", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.23:57758 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.443253+00:00", "request_id": "80f662fa52a645cbb1650fa5213c6287", "client_ip": "10.10.1.24", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.24:58448 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.468846+00:00", "request_id": "af9dc6c3c9464832b850b89a4353778f", "client_ip": "10.10.1.25", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.25:56194 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:34:10.494398+00:00", "request_id": "02b6a7fa5cdf4d43bd12b4e348f14564", "client_ip": "10.10.1.250", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.250:51196 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [146]

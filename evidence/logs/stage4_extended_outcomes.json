@@ -1,0 +1,36 @@
+{
+  "request_ids": [
+    "37b60d50d7fb420eb4de6a45dd7c4e7b",
+    "c8e8a6f955ec40659a67333ed62a916b",
+    "8555e84308c94b7d86b5bf63754e707e",
+    "f6e98a03ea9b4faebf303c71b9f3069f",
+    "34a2bc5c3e734df9960aa948b676dc6b",
+    "2e7d7348bc1744f9a73a415a5cf887cc",
+    "62414f6e71a2440dbd0491cf8d2c1dc8"
+  ],
+  "ban_status": 403,
+  "retry_after": 2,
+  "post_expiry_status": 200,
+  "outage_status": 502,
+  "outage_decision": {
+    "event": "final_outcome",
+    "request_id": "62414f6e71a2440dbd0491cf8d2c1dc8",
+    "client_ip": "10.10.1.22",
+    "method": "GET",
+    "path": "/api/info",
+    "status": 502,
+    "upstream_result": "connect_error",
+    "upstream_latency_ms": 9.681431998615153
+  },
+  "exclusive_intervals": {
+    "10": 6,
+    "25": 2,
+    "50": 0,
+    "100": 0,
+    "250": 0,
+    "500": 0,
+    "1000": 0,
+    "2500": 0,
+    "+Inf": 0
+  }
+}

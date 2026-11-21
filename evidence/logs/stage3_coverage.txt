@@ -1,0 +1,35 @@
+COMMAND: date -u
+Sat Nov 21 19:44:34 UTC 2026
+COMMAND: coverage run --branch -m pytest && coverage report -m
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.5, pluggy-1.7.0
+rootdir: /work
+configfile: pytest.ini
+testpaths: tests
+plugins: asyncio-0.26.0, anyio-4.16.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 104 items
+
+tests/test_apps.py ...........                                           [ 10%]
+tests/test_risk_state.py ......................                          [ 31%]
+tests/test_security.py ................................................. [ 78%]
+.............                                                            [ 91%]
+tests/test_security_adapter.py .......                                   [ 98%]
+tests/test_triggering_ban.py ..                                          [100%]
+
+============================= 104 passed in 3.78s ==============================
+Name                             Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------
+backend/app.py                      49      4      6      1    91%   61-62, 70-71
+gateway/app.py                      96      8     12      0    91%   80-87
+gateway/risk_state.py               84      0     30      1    99%   66->68
+gateway/security.py                177      2     60      1    99%   20->22, 92, 212
+gateway/security_adapter.py         21      0      8      0   100%
+gateway/security_config.py          64      0     14      0   100%
+tests/test_apps.py                 109      2      2      0    98%   70, 84
+tests/test_risk_state.py            84      0      8      0   100%
+tests/test_security.py             186      0     10      0   100%
+tests/test_security_adapter.py      28      1      0      0    96%   33
+tests/test_triggering_ban.py        18      0      0      0   100%
+----------------------------------------------------------------------------
+TOTAL                              916     17    150      3    98%

@@ -1,0 +1,30 @@
+counter,expected,observed,log_derived,note
+bans_issued,1,1,1,
+ban_expiries,1,1,1,inferred from banned then allowed decision after wait
+upstream_errors,1,1,1,final-outcome records; client observed 502
+latency_count,8,8,8,includes baseline summary after its snapshot
+latency_interval_sum,8,8,8,intervals derived from cumulative bucket differences; includes baseline summary
+api_latency_count,7,7,7,
+api_latency_interval_sum,7,7,7,
+final_status_200,2,2,2,
+final_status_401,3,3,3,
+final_status_403,2,2,2,
+final_status_502,1,1,1,
+latency_bucket_le_10,,6,,exclusive interval=6
+latency_bucket_le_25,,8,,exclusive interval=2
+latency_bucket_le_50,,8,,exclusive interval=0
+latency_bucket_le_100,,8,,exclusive interval=0
+latency_bucket_le_250,,8,,exclusive interval=0
+latency_bucket_le_500,,8,,exclusive interval=0
+latency_bucket_le_1000,,8,,exclusive interval=0
+latency_bucket_le_2500,,8,,exclusive interval=0
+latency_bucket_le_+Inf,,8,,exclusive interval=0
+api_latency_bucket_le_10,,5,,exclusive interval=5
+api_latency_bucket_le_25,,7,,exclusive interval=2
+api_latency_bucket_le_50,,7,,exclusive interval=0
+api_latency_bucket_le_100,,7,,exclusive interval=0
+api_latency_bucket_le_250,,7,,exclusive interval=0
+api_latency_bucket_le_500,,7,,exclusive interval=0
+api_latency_bucket_le_1000,,7,,exclusive interval=0
+api_latency_bucket_le_2500,,7,,exclusive interval=0
+api_latency_bucket_le_+Inf,,7,,exclusive interval=0

@@ -1,0 +1,11 @@
+COMMAND: date -u
+Sat Nov 21 08:25:06 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers
+INFO:     Started server process [97]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"request_id": "bed3e74ccf0b4f1e9a8e86d33386f3f5", "client_ip": "10.10.3.10", "method": "GET", "path": "/health", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.3.10:43606 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "6492f7e600374ab3873b4f433844e9d6", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 85.52737299760338}
+INFO:     10.10.1.10:47964 - "GET /api/info HTTP/1.1" 200 OK

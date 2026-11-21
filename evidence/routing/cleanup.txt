@@ -1,0 +1,8 @@
+COMMAND: bash scripts/topo_down.sh
+Sat Nov 21 06:18:28 UTC 2026
+Project namespaces removed or already absent.
+COMMAND: bash scripts/topo_down.sh (idempotence)
+Project namespaces removed or already absent.
+COMMAND: ip netns list; ip -o link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000\    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+Cleanup verification passed.

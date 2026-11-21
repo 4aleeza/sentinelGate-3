@@ -1,0 +1,110 @@
+COMMAND: date -u
+Sat Nov 21 20:38:14 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers --forwarded-allow-ips '' --workers 1
+INFO:     Started server process [150]
+INFO:     Waiting for application startup.
+{"event": "security_config", "config": {"bucket_capacity": 20.0, "bucket_refill_per_second": 0.001, "elevated_factor": 0.5, "elevated_threshold": 40.0, "ban_threshold": 70.0, "score_max": 100.0, "decay_per_second": 0.5, "ban_base_seconds": 10.0, "ban_max_seconds": 240.0, "offence_memory_seconds": 600.0, "probation_score": 30.0, "max_ips": 10000, "idle_seconds": 900.0, "max_token_bytes": 4096, "max_claim_bytes": 256, "max_path_bytes": 256, "max_query_bytes": 512, "max_query_params": 20, "max_headers": 50, "max_header_value_bytes": 2048, "max_body_bytes": 65536, "max_path_pattern_chars": 200, "jwt_leeway_seconds": 5.0, "issuer": "sentinelgate-lab", "audience": "sentinelgate-api", "points_rate_limited": 5.0, "points_missing_token": 5.0, "points_malformed_token": 10.0, "points_expired_token": 5.0, "points_bad_claims": 10.0, "points_insufficient_scope": 5.0, "points_bad_request": 10.0, "points_bad_method": 10.0, "points_bad_path": 10.0, "points_bad_content_type": 10.0, "points_body_too_large": 10.0, "points_suspicious_pattern": 15.0, "points_bad_signature": 20.0, "points_bad_algorithm": 40.0}, "secret": "[redacted]"}
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"timestamp": "2026-11-21T20:38:15.968079+00:00", "request_id": "7db2137ed55b49b8aaef49a731365007", "client_ip": "10.10.1.250", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.250:55340 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:18.846844+00:00", "request_id": "978971ddc37d4e80b9e848708f3c82fe", "client_ip": "10.10.1.11", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.11:44285 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:19.042780+00:00", "request_id": "8e7392a8be8c49f9a638b1975e0c1563", "client_ip": "10.10.1.12", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "missing_token", "status": 401, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.12:47959 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:19.186206+00:00", "request_id": "9ac8aa7214f5401583a6fca1ef5d002a", "client_ip": "10.10.1.13", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "expired_token", "status": 401, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.13:43609 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:19.386525+00:00", "request_id": "a1908d59daa841a2b475d798b3addad6", "client_ip": "10.10.1.14", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.14:57323 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:20.539148+00:00", "request_id": "5111d8f3a0774b82be4965d04f606442", "client_ip": "10.10.1.15", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_algorithm", "status": 401, "score_before": 0.0, "score_after": 40.0, "tier": "elevated", "ban_remaining": 0}
+INFO:     10.10.1.15:41767 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:20.674392+00:00", "request_id": "0b1cbd60497c49da95ef23160953e4f0", "client_ip": "10.10.1.16", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_claims", "status": 401, "score_before": 0.0, "score_after": 10.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.16:50229 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:20.797736+00:00", "request_id": "12192f2ea50d42dd92a6a03e73864d9b", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "insufficient_scope", "status": 403, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.17:53307 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-21T20:38:21.002882+00:00", "request_id": "82d6209992234456ba35887940ff888a", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/../info", "decision": "reject", "reason": "bad_path", "status": 400, "score_before": 0.0, "score_after": 10.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.18:53617 - "GET /api/../info HTTP/1.1" 400 Bad Request
+{"timestamp": "2026-11-21T20:38:21.156370+00:00", "request_id": "5a782ae68bca40d4b3b3bbb3879ba56b", "client_ip": "10.10.1.19", "method": "POST", "path": "/api/info", "decision": "reject", "reason": "bad_content_type", "status": 415, "score_before": 0.0, "score_after": 10.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.19:55629 - "POST /api/info HTTP/1.1" 415 Unsupported Media Type
+{"timestamp": "2026-11-21T20:38:21.284717+00:00", "request_id": "66a6acc427334e98928ac76afa4aa4f4", "client_ip": "10.10.1.20", "method": "POST", "path": "/api/info", "decision": "reject", "reason": "body_too_large", "status": 413, "score_before": 0.0, "score_after": 10.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.20:49709 - "POST /api/info HTTP/1.1" 413 Request Entity Too Large
+{"timestamp": "2026-11-21T20:38:21.409297+00:00", "request_id": "a1ad64774e7141a48262fa95f33a0cb6", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:56873 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:21.596698+00:00", "request_id": "44b8a31c6c2b4f219084aa2689e46798", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:48877 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:21.714999+00:00", "request_id": "fd2deebe6df74ba282a201e11e63eac5", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:35259 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:21.895645+00:00", "request_id": "f1f59709db484b39989fe6df908028c4", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:43621 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.074584+00:00", "request_id": "4b5ef52a2a104c9f96ac80419cb1bd74", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:37887 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.257820+00:00", "request_id": "1f3b941b8b7447c28bd34cd767243125", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:39793 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.444148+00:00", "request_id": "ea223804d95f4fc6896e7abb4cf0b242", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:58885 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.629819+00:00", "request_id": "83f165bcd42f4ae48a6ef486c290b32c", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:37393 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.806218+00:00", "request_id": "11847dcd7a4143b3835246c94122acb7", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:56075 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:22.983268+00:00", "request_id": "1fc5e68758be4af39c10a943b5257c8c", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:40385 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.173234+00:00", "request_id": "6761724998d044c4895c16149216e00c", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:35367 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.337302+00:00", "request_id": "3d5094216163466d8ae13057f316caa0", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:36813 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.519426+00:00", "request_id": "430d947a2a04470080478df8f5f230ba", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:40447 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.624156+00:00", "request_id": "04dff491c319476198e02bccae6b8413", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:46323 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.725435+00:00", "request_id": "632b79d2334c4f859f4db6b2ed952544", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:58211 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.843301+00:00", "request_id": "1fda605154d0478f9a36f4f1db383762", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:50743 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:23.969853+00:00", "request_id": "7a71411e21924b929c72cde405be43c8", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:47623 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:24.085341+00:00", "request_id": "9f8c4c6740dc433b96a29ab049f8b75f", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:58599 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:24.216421+00:00", "request_id": "d21560d25a914e07a00abb837347ceaf", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:33167 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:24.400206+00:00", "request_id": "0ccedf4392fc4b00a4d0b3b138c96578", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:40075 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:24.576113+00:00", "request_id": "fec2b8064017480cad8dc31843db1908", "client_ip": "10.10.1.21", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "rate_limited", "status": 429, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.21:53699 - "GET /api/info HTTP/1.1" 429 Too Many Requests
+{"timestamp": "2026-11-21T20:38:24.759706+00:00", "request_id": "1ddff63ae6fe4db5a077391678a81284", "client_ip": "10.10.1.22", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.22:37005 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:24.911099+00:00", "request_id": "44ba056798c849c3b2302d59f466dfbf", "client_ip": "10.10.1.22", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 19.92438449400015, "score_after": 39.92438449400015, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.22:53459 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:25.002592+00:00", "request_id": "004819540c5c4d28a0ad5f31b577312d", "client_ip": "10.10.1.22", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 39.878728163500455, "score_after": 59.878728163500455, "tier": "elevated", "ban_remaining": 0}
+INFO:     10.10.1.22:51501 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:25.153420+00:00", "request_id": "d3edade86737469e974b870cdc998c45", "client_ip": "10.10.1.22", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 59.803573582500576, "score_after": 79.80357358250058, "tier": "banned", "ban_remaining": 10}
+INFO:     10.10.1.22:50791 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-21T20:38:25.344980+00:00", "request_id": "37b0e6c26a0f423ab92ae3d2c74fd8b7", "client_ip": "10.10.1.22", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 79.80357358250058, "score_after": 79.80357358250058, "tier": "banned", "ban_remaining": 10}
+INFO:     10.10.1.22:60309 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-21T20:38:25.539952+00:00", "request_id": "280512bf16e24dad95de5ee77ac13cf9", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.23:33919 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:25.712641+00:00", "request_id": "9e0b0d51515046cb8544e34a51a15536", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 19.913780556500114, "score_after": 39.913780556500114, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.23:42759 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:25.902031+00:00", "request_id": "c3ca170519fa439884eff831237d5460", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 39.819314770500114, "score_after": 59.819314770500114, "tier": "elevated", "ban_remaining": 0}
+INFO:     10.10.1.23:37111 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:26.070488+00:00", "request_id": "35c0b6a1f7284aa395b3385d66077ff0", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 59.7352499284998, "score_after": 79.7352499284998, "tier": "banned", "ban_remaining": 10}
+INFO:     10.10.1.23:44177 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-21T20:38:26.199668+00:00", "request_id": "77db00c997f54ac0bfd3fc7a6801679d", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 79.7352499284998, "score_after": 79.7352499284998, "tier": "banned", "ban_remaining": 10}
+INFO:     10.10.1.23:51839 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-21T20:38:37.352180+00:00", "request_id": "b27cfee4f68e44a1bdf3c5a14122ba63", "client_ip": "10.10.1.23", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 29.357130227000198, "score_after": 29.357130227000198, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.23:47193 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:38:37.571548+00:00", "request_id": "5b085e96b0b84d6ca00d8e6a1091661f", "client_ip": "10.10.1.24", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.24:39203 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:37.684263+00:00", "request_id": "4830181528c8442f86821ead70788a97", "client_ip": "10.10.1.24", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 19.943758205999984, "score_after": 39.943758205999984, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.24:39373 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:38:37.855037+00:00", "request_id": "485475a7c60a45f7a780a1dc545b6e76", "client_ip": "10.10.1.24", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 39.85857555600023, "score_after": 59.85857555600023, "tier": "elevated", "ban_remaining": 0}
+INFO:     10.10.1.24:50641 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:39:23.000077+00:00", "request_id": "bf56c95d8ff5472d83541c93fdcd03c3", "client_ip": "10.10.1.24", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 37.28388704150029, "score_after": 37.28388704150029, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.24:51093 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-21T20:39:23.186402+00:00", "request_id": "e566e500f59c4faeafe557abb289bf8a", "client_ip": "10.10.1.25", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "missing_token", "status": 401, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.25:48631 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-21T20:39:23.313679+00:00", "request_id": "947e8d2bd8934a7288737dbe0e836c55", "client_ip": "10.10.1.25", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 4.936481120500048, "score_after": 4.936481120500048, "tier": "normal", "ban_remaining": 0}
+INFO:     10.10.1.25:54273 - "GET /api/info HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [150]

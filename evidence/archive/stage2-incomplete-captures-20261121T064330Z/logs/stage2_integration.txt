@@ -1,0 +1,410 @@
+COMMAND: date -u
+Sat Nov 21 06:42:09 UTC 2026
+COMMAND: pytest -q
+COMMAND: date -u
+Sat Nov 21 06:42:09 UTC 2026
+COMMAND: pytest -q
+/opt/venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:217: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+.....                                                                    [100%]
+5 passed in 1.99s
+COMMAND: bash scripts/stage2_up.sh
+Topology created.
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 3 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 0 ms: Couldn't connect to server
+backend healthy
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+curl: (7) Failed to connect to 10.10.3.10 port 8000 after 0 ms: Couldn't connect to server
+gateway healthy
+COMMAND: ip netns exec sg-client curl -i http://10.10.3.10:8000/health
+HTTP/1.1 200 OK
+date: Sat, 21 Nov 2026 06:42:16 GMT
+server: uvicorn
+content-length: 35
+content-type: application/json
+x-request-id: d62f795bcaa741d79365132826b303c0
+
+{"status":"ok","service":"gateway"}COMMAND: ip netns exec sg-client curl -i http://10.10.3.10:8000/ready
+HTTP/1.1 200 OK
+date: Sat, 21 Nov 2026 06:42:16 GMT
+server: uvicorn
+content-length: 18
+content-type: application/json
+x-request-id: 1a4650d71d2f4fb6b9c3291e4eb7cf01
+
+{"status":"ready"}COMMAND: ip netns exec sg-client curl -i http://10.10.3.10:8000/api/info
+HTTP/1.1 200 OK
+date: Sat, 21 Nov 2026 06:42:16 GMT
+server: uvicorn
+date: Sat, 21 Nov 2026 06:42:15 GMT
+server: uvicorn
+content-type: application/json
+content-length: 196
+x-request-id: cccb2badb6d14c729b5cee559444e17a
+
+{"peer_host":"10.10.4.1","peer_port":47113,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.10","x_request_id":"cccb2badb6d14c729b5cee559444e17a","timestamp":"2026-11-21T06:42:16.664991+00:00"}COMMAND: verify /api/info peer and X-Forwarded-For with jq; response: {"peer_host":"10.10.4.1","peer_port":47113,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.10","x_request_id":"0ee630d418f14f258292e135d0367896","timestamp":"2026-11-21T06:42:16.696662+00:00"}
+true
+COMMAND: ip netns exec sg-client curl -i -X POST -H Content-Type:application/json -d {"test":true} http://10.10.3.10:8000/api/echo
+HTTP/1.1 200 OK
+date: Sat, 21 Nov 2026 06:42:16 GMT
+server: uvicorn
+date: Sat, 21 Nov 2026 06:42:15 GMT
+server: uvicorn
+content-type: application/json
+content-length: 217
+x-request-id: 8215a9d8c8fa4470b12bdb844c96125b
+
+{"body":{"test":true},"peer_host":"10.10.4.1","peer_port":47113,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.10","x_request_id":"8215a9d8c8fa4470b12bdb844c96125b","timestamp":"2026-11-21T06:42:16.745686+00:00"}COMMAND: ip netns exec sg-client curl --connect-timeout 3 http://10.10.4.10:9000/health (failure expected)
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 38 ms: Couldn't connect to server
+PASS direct backend connection failed
+COMMAND: ip netns exec sg-client sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client sysctl net.ipv4.ip_default_ttl
+net.ipv4.ip_default_ttl = 64
+COMMAND: ip netns exec sg-client python scripts/concurrency.py
+{
+  "timestamp_utc": "2026-11-21T06:42:18.295785+00:00",
+  "command": "ip netns exec sg-client python scripts/concurrency.py",
+  "total_ms": 1085.6804329960141,
+  "results": [
+    {
+      "request": 0,
+      "status": 200,
+      "elapsed_ms": 549.2377019982086
+    },
+    {
+      "request": 1,
+      "status": 200,
+      "elapsed_ms": 699.0464770060498
+    },
+    {
+      "request": 2,
+      "status": 200,
+      "elapsed_ms": 643.920351009001
+    },
+    {
+      "request": 3,
+      "status": 200,
+      "elapsed_ms": 656.4764119975735
+    },
+    {
+      "request": 4,
+      "status": 200,
+      "elapsed_ms": 652.5490049971268
+    },
+    {
+      "request": 5,
+      "status": 200,
+      "elapsed_ms": 662.2234469978139
+    },
+    {
+      "request": 6,
+      "status": 200,
+      "elapsed_ms": 692.6737309986493
+    },
+    {
+      "request": 7,
+      "status": 200,
+      "elapsed_ms": 711.5101219969802
+    },
+    {
+      "request": 8,
+      "status": 200,
+      "elapsed_ms": 722.3534740041941
+    },
+    {
+      "request": 9,
+      "status": 200,
+      "elapsed_ms": 704.1106890101219
+    },
+    {
+      "request": 10,
+      "status": 200,
+      "elapsed_ms": 715.2651979995426
+    },
+    {
+      "request": 11,
+      "status": 200,
+      "elapsed_ms": 703.2237300009001
+    },
+    {
+      "request": 12,
+      "status": 200,
+      "elapsed_ms": 709.8284189996775
+    },
+    {
+      "request": 13,
+      "status": 200,
+      "elapsed_ms": 726.4747160079423
+    },
+    {
+      "request": 14,
+      "status": 200,
+      "elapsed_ms": 726.8622869887622
+    },
+    {
+      "request": 15,
+      "status": 200,
+      "elapsed_ms": 725.9226169990143
+    },
+    {
+      "request": 16,
+      "status": 200,
+      "elapsed_ms": 736.2614789890358
+    },
+    {
+      "request": 17,
+      "status": 200,
+      "elapsed_ms": 785.9864330093842
+    },
+    {
+      "request": 18,
+      "status": 200,
+      "elapsed_ms": 785.4256319988053
+    },
+    {
+      "request": 19,
+      "status": 200,
+      "elapsed_ms": 785.035262000747
+    },
+    {
+      "request": 20,
+      "status": 200,
+      "elapsed_ms": 786.0856510087615
+    },
+    {
+      "request": 21,
+      "status": 200,
+      "elapsed_ms": 753.209931004676
+    },
+    {
+      "request": 22,
+      "status": 200,
+      "elapsed_ms": 783.8229430053616
+    },
+    {
+      "request": 23,
+      "status": 200,
+      "elapsed_ms": 751.9605060078902
+    },
+    {
+      "request": 24,
+      "status": 200,
+      "elapsed_ms": 753.9523650048068
+    },
+    {
+      "request": 25,
+      "status": 200,
+      "elapsed_ms": 752.9440829966916
+    },
+    {
+      "request": 26,
+      "status": 200,
+      "elapsed_ms": 751.9385019986657
+    },
+    {
+      "request": 27,
+      "status": 200,
+      "elapsed_ms": 759.7535090026213
+    },
+    {
+      "request": 28,
+      "status": 200,
+      "elapsed_ms": 768.90465800534
+    },
+    {
+      "request": 29,
+      "status": 200,
+      "elapsed_ms": 772.7518499887083
+    },
+    {
+      "request": 30,
+      "status": 200,
+      "elapsed_ms": 873.1697320035892
+    },
+    {
+      "request": 31,
+      "status": 200,
+      "elapsed_ms": 879.6317959931912
+    },
+    {
+      "request": 32,
+      "status": 200,
+      "elapsed_ms": 881.3007959979586
+    },
+    {
+      "request": 33,
+      "status": 200,
+      "elapsed_ms": 877.7267529949313
+    },
+    {
+      "request": 34,
+      "status": 200,
+      "elapsed_ms": 886.079857009463
+    },
+    {
+      "request": 35,
+      "status": 200,
+      "elapsed_ms": 877.3662870080443
+    },
+    {
+      "request": 36,
+      "status": 200,
+      "elapsed_ms": 884.039089010912
+    },
+    {
+      "request": 37,
+      "status": 200,
+      "elapsed_ms": 875.1350859965896
+    },
+    {
+      "request": 38,
+      "status": 200,
+      "elapsed_ms": 874.7607190016424
+    },
+    {
+      "request": 39,
+      "status": 200,
+      "elapsed_ms": 874.5437800098443
+    },
+    {
+      "request": 40,
+      "status": 200,
+      "elapsed_ms": 815.269005994196
+    },
+    {
+      "request": 41,
+      "status": 200,
+      "elapsed_ms": 814.7956210013945
+    },
+    {
+      "request": 42,
+      "status": 200,
+      "elapsed_ms": 815.4915460036136
+    },
+    {
+      "request": 43,
+      "status": 200,
+      "elapsed_ms": 819.5951849920675
+    },
+    {
+      "request": 44,
+      "status": 200,
+      "elapsed_ms": 818.8538520043949
+    },
+    {
+      "request": 45,
+      "status": 200,
+      "elapsed_ms": 818.60610700096
+    },
+    {
+      "request": 46,
+      "status": 200,
+      "elapsed_ms": 818.0792110069888
+    },
+    {
+      "request": 47,
+      "status": 200,
+      "elapsed_ms": 831.3785069913138
+    },
+    {
+      "request": 48,
+      "status": 200,
+      "elapsed_ms": 830.5085500032874
+    },
+    {
+      "request": 49,
+      "status": 200,
+      "elapsed_ms": 829.6723000094062
+    }
+  ]
+}
+true
+COMMAND: tshark captures on sg-r1/sg-r11, sg-gateway/sg-g0, sg-gateway/sg-g1
+COMMAND: ip netns exec sg-client curl http://10.10.3.10:8000/api/info
+{"peer_host":"10.10.4.1","peer_port":47113,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.10","x_request_id":"1d77e6ef2dcf4931a8138fc929b4fd8b","timestamp":"2026-11-21T06:42:21.415059+00:00"}
+Running as user "root" and group "root". This could be dangerous.
+Capturing on 'sg-r11'
+0 packets captured
+Running as user "root" and group "root". This could be dangerous.
+Capturing on 'sg-g0'
+0 packets captured
+Running as user "root" and group "root". This could be dangerous.
+Capturing on 'sg-g1'
+100 packets captured
+COMMAND: inspect routed and backend TCP packets (streams may already be open)
+Running as user "root" and group "root". This could be dangerous.
+Running as user "root" and group "root". This could be dangerous.
+10.10.4.1	10.10.4.10	0
+10.10.4.1	10.10.4.10	2
+10.10.4.1	10.10.4.10	1
+10.10.4.1	10.10.4.10	3
+10.10.4.1	10.10.4.10	5
+10.10.4.1	10.10.4.10	4
+10.10.4.1	10.10.4.10	8
+10.10.4.1	10.10.4.10	7
+10.10.4.1	10.10.4.10	6
+10.10.4.1	10.10.4.10	11
+10.10.4.1	10.10.4.10	10
+10.10.4.1	10.10.4.10	9
+10.10.4.1	10.10.4.10	12
+10.10.4.1	10.10.4.10	14
+10.10.4.1	10.10.4.10	13
+10.10.4.1	10.10.4.10	15
+10.10.4.1	10.10.4.10	23
+10.10.4.1	10.10.4.10	22
+10.10.4.1	10.10.4.10	21
+10.10.4.1	10.10.4.10	20
+10.10.4.1	10.10.4.10	19
+10.10.4.1	10.10.4.10	18
+10.10.4.1	10.10.4.10	17
+10.10.4.1	10.10.4.10	16
+10.10.4.1	10.10.4.10	26
+10.10.4.1	10.10.4.10	25
+10.10.4.1	10.10.4.10	24
+10.10.4.1	10.10.4.10	27
+10.10.4.1	10.10.4.10	28
+10.10.4.1	10.10.4.10	48
+10.10.4.1	10.10.4.10	47
+10.10.4.1	10.10.4.10	46
+10.10.4.1	10.10.4.10	45
+10.10.4.1	10.10.4.10	44
+10.10.4.1	10.10.4.10	43
+10.10.4.1	10.10.4.10	42
+10.10.4.1	10.10.4.10	41
+10.10.4.1	10.10.4.10	40
+10.10.4.1	10.10.4.10	39
+10.10.4.1	10.10.4.10	38
+10.10.4.1	10.10.4.10	37
+10.10.4.1	10.10.4.10	36
+10.10.4.1	10.10.4.10	35
+10.10.4.1	10.10.4.10	34
+10.10.4.1	10.10.4.10	33
+10.10.4.1	10.10.4.10	32
+10.10.4.1	10.10.4.10	31
+10.10.4.1	10.10.4.10	30
+10.10.4.1	10.10.4.10	29
+10.10.4.1	10.10.4.10	49
+COMMAND: bash scripts/stage2_down.sh
+sg-gateway port 8000 free
+sg-backend port 9000 free
+COMMAND: bash scripts/topo_down.sh
+Project namespaces removed or already absent.
+COMMAND: ip netns list; ip -o link show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000\    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+Stage 2 cleanup passed.

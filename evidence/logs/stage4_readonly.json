@@ -1,0 +1,102 @@
+{
+  "before": {
+    "notice": "Lab POC: deterministic rules, in-memory state, lost on restart",
+    "start_time": "2026-11-21T21:45:36.089197+00:00",
+    "uptime_seconds": 3.85992904700106,
+    "ips": [
+      {
+        "ip": "10.10.1.13",
+        "score": 39.04128036200018,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.15",
+        "score": 24.821989532498264,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.12",
+        "score": 13.963078515500456,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.14",
+        "score": 9.107684871500169,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.11",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.16",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.250",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      }
+    ]
+  },
+  "after": {
+    "notice": "Lab POC: deterministic rules, in-memory state, lost on restart",
+    "start_time": "2026-11-21T21:45:36.089197+00:00",
+    "uptime_seconds": 4.037912210000286,
+    "ips": [
+      {
+        "ip": "10.10.1.13",
+        "score": 38.95229208149976,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.15",
+        "score": 24.733001251997848,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.12",
+        "score": 13.87409023500004,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.14",
+        "score": 9.018696590999753,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.11",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.16",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      },
+      {
+        "ip": "10.10.1.250",
+        "score": 0.0,
+        "tier": "normal",
+        "ban_remaining": 0
+      }
+    ]
+  },
+  "unexpected_changes": [],
+  "note": "Scores may decrease naturally with time; monitoring client consumes its own bucket."
+}

@@ -1,0 +1,11 @@
+COMMAND: date -u
+Sat Nov 21 20:34:06 UTC 2026
+COMMAND: ip netns exec sg-backend /opt/venv/bin/uvicorn backend.app:app --host 10.10.4.10 --port 9000 --no-proxy-headers --forwarded-allow-ips '' --workers 1
+INFO:     Started server process [129]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.4.10:9000 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [129]

@@ -1,0 +1,257 @@
+{
+  "timestamp_utc": "2026-11-21T06:42:18.295785+00:00",
+  "command": "ip netns exec sg-client python scripts/concurrency.py",
+  "total_ms": 1085.6804329960141,
+  "results": [
+    {
+      "request": 0,
+      "status": 200,
+      "elapsed_ms": 549.2377019982086
+    },
+    {
+      "request": 1,
+      "status": 200,
+      "elapsed_ms": 699.0464770060498
+    },
+    {
+      "request": 2,
+      "status": 200,
+      "elapsed_ms": 643.920351009001
+    },
+    {
+      "request": 3,
+      "status": 200,
+      "elapsed_ms": 656.4764119975735
+    },
+    {
+      "request": 4,
+      "status": 200,
+      "elapsed_ms": 652.5490049971268
+    },
+    {
+      "request": 5,
+      "status": 200,
+      "elapsed_ms": 662.2234469978139
+    },
+    {
+      "request": 6,
+      "status": 200,
+      "elapsed_ms": 692.6737309986493
+    },
+    {
+      "request": 7,
+      "status": 200,
+      "elapsed_ms": 711.5101219969802
+    },
+    {
+      "request": 8,
+      "status": 200,
+      "elapsed_ms": 722.3534740041941
+    },
+    {
+      "request": 9,
+      "status": 200,
+      "elapsed_ms": 704.1106890101219
+    },
+    {
+      "request": 10,
+      "status": 200,
+      "elapsed_ms": 715.2651979995426
+    },
+    {
+      "request": 11,
+      "status": 200,
+      "elapsed_ms": 703.2237300009001
+    },
+    {
+      "request": 12,
+      "status": 200,
+      "elapsed_ms": 709.8284189996775
+    },
+    {
+      "request": 13,
+      "status": 200,
+      "elapsed_ms": 726.4747160079423
+    },
+    {
+      "request": 14,
+      "status": 200,
+      "elapsed_ms": 726.8622869887622
+    },
+    {
+      "request": 15,
+      "status": 200,
+      "elapsed_ms": 725.9226169990143
+    },
+    {
+      "request": 16,
+      "status": 200,
+      "elapsed_ms": 736.2614789890358
+    },
+    {
+      "request": 17,
+      "status": 200,
+      "elapsed_ms": 785.9864330093842
+    },
+    {
+      "request": 18,
+      "status": 200,
+      "elapsed_ms": 785.4256319988053
+    },
+    {
+      "request": 19,
+      "status": 200,
+      "elapsed_ms": 785.035262000747
+    },
+    {
+      "request": 20,
+      "status": 200,
+      "elapsed_ms": 786.0856510087615
+    },
+    {
+      "request": 21,
+      "status": 200,
+      "elapsed_ms": 753.209931004676
+    },
+    {
+      "request": 22,
+      "status": 200,
+      "elapsed_ms": 783.8229430053616
+    },
+    {
+      "request": 23,
+      "status": 200,
+      "elapsed_ms": 751.9605060078902
+    },
+    {
+      "request": 24,
+      "status": 200,
+      "elapsed_ms": 753.9523650048068
+    },
+    {
+      "request": 25,
+      "status": 200,
+      "elapsed_ms": 752.9440829966916
+    },
+    {
+      "request": 26,
+      "status": 200,
+      "elapsed_ms": 751.9385019986657
+    },
+    {
+      "request": 27,
+      "status": 200,
+      "elapsed_ms": 759.7535090026213
+    },
+    {
+      "request": 28,
+      "status": 200,
+      "elapsed_ms": 768.90465800534
+    },
+    {
+      "request": 29,
+      "status": 200,
+      "elapsed_ms": 772.7518499887083
+    },
+    {
+      "request": 30,
+      "status": 200,
+      "elapsed_ms": 873.1697320035892
+    },
+    {
+      "request": 31,
+      "status": 200,
+      "elapsed_ms": 879.6317959931912
+    },
+    {
+      "request": 32,
+      "status": 200,
+      "elapsed_ms": 881.3007959979586
+    },
+    {
+      "request": 33,
+      "status": 200,
+      "elapsed_ms": 877.7267529949313
+    },
+    {
+      "request": 34,
+      "status": 200,
+      "elapsed_ms": 886.079857009463
+    },
+    {
+      "request": 35,
+      "status": 200,
+      "elapsed_ms": 877.3662870080443
+    },
+    {
+      "request": 36,
+      "status": 200,
+      "elapsed_ms": 884.039089010912
+    },
+    {
+      "request": 37,
+      "status": 200,
+      "elapsed_ms": 875.1350859965896
+    },
+    {
+      "request": 38,
+      "status": 200,
+      "elapsed_ms": 874.7607190016424
+    },
+    {
+      "request": 39,
+      "status": 200,
+      "elapsed_ms": 874.5437800098443
+    },
+    {
+      "request": 40,
+      "status": 200,
+      "elapsed_ms": 815.269005994196
+    },
+    {
+      "request": 41,
+      "status": 200,
+      "elapsed_ms": 814.7956210013945
+    },
+    {
+      "request": 42,
+      "status": 200,
+      "elapsed_ms": 815.4915460036136
+    },
+    {
+      "request": 43,
+      "status": 200,
+      "elapsed_ms": 819.5951849920675
+    },
+    {
+      "request": 44,
+      "status": 200,
+      "elapsed_ms": 818.8538520043949
+    },
+    {
+      "request": 45,
+      "status": 200,
+      "elapsed_ms": 818.60610700096
+    },
+    {
+      "request": 46,
+      "status": 200,
+      "elapsed_ms": 818.0792110069888
+    },
+    {
+      "request": 47,
+      "status": 200,
+      "elapsed_ms": 831.3785069913138
+    },
+    {
+      "request": 48,
+      "status": 200,
+      "elapsed_ms": 830.5085500032874
+    },
+    {
+      "request": 49,
+      "status": 200,
+      "elapsed_ms": 829.6723000094062
+    }
+  ]
+}

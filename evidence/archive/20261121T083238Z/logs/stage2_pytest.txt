@@ -1,0 +1,4 @@
+COMMAND: date -u
+Sat Nov 21 07:04:10 UTC 2026
+COMMAND: pytest -q
+scripts/stage2_verify.sh: line 8: python: command not found

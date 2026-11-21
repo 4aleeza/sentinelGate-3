@@ -1,0 +1,23 @@
+COMMAND: date -u
+Sat Nov 21 06:41:13 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers
+INFO:     Started server process [92]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"request_id": "a2dc02424c494f269d73fc04b6f650fc", "client_ip": "10.10.3.10", "method": "GET", "path": "/health", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.3.10:35530 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "08dba4f4bca549ef99c0c8fb526d181d", "client_ip": "10.10.1.10", "method": "GET", "path": "/health", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.1.10:53780 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "0829131ef28a4355b0cba7fbf5041abc", "client_ip": "10.10.1.10", "method": "GET", "path": "/ready", "status": 200, "upstream_latency_ms": null}
+INFO:     10.10.1.10:53786 - "GET /ready HTTP/1.1" 200 OK
+{"request_id": "a87c06c1e4c14f3b88d3b859ed71307c", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 8.649313997011632}
+INFO:     10.10.1.10:53794 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "dbe80cc46971436280c7bf5e7552a84f", "client_ip": "10.10.1.10", "method": "GET", "path": "/api/info", "status": 200, "upstream_latency_ms": 7.469667005352676}
+INFO:     10.10.1.10:53798 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "767c77b48a6d4207b31e7fef7a13a7f1", "client_ip": "10.10.1.10", "method": "POST", "path": "/api/echo", "status": 200, "upstream_latency_ms": 8.023983013117686}
+INFO:     10.10.1.10:53806 - "POST /api/echo HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [92]

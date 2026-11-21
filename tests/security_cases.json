@@ -1,0 +1,263 @@
+[
+  {
+    "id": "SC-01",
+    "description": "valid request allowed",
+    "source_ip": "10.10.1.11",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 200,
+    "expected_reason": "allowed",
+    "backend_reached": true
+  },
+  {
+    "id": "SC-02",
+    "description": "missing token",
+    "source_ip": "10.10.1.12",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": null
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 401,
+    "expected_reason": "missing_token",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-03",
+    "description": "expired token",
+    "source_ip": "10.10.1.13",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "expired"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 401,
+    "expected_reason": "expired_token",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-04",
+    "description": "bad signature",
+    "source_ip": "10.10.1.14",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "wrong-signature"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 401,
+    "expected_reason": "bad_signature",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-05",
+    "description": "algorithm none",
+    "source_ip": "10.10.1.15",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "none"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 401,
+    "expected_reason": "bad_algorithm",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-06",
+    "description": "wrong audience",
+    "source_ip": "10.10.1.16",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "wrong-audience"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 401,
+    "expected_reason": "bad_claims",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-07",
+    "description": "insufficient scope",
+    "source_ip": "10.10.1.17",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "insufficient-scope"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 403,
+    "expected_reason": "insufficient_scope",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-08",
+    "description": "path traversal",
+    "source_ip": "10.10.1.18",
+    "request": {
+      "method": "GET",
+      "path": "/api/%2e%2e/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 400,
+    "expected_reason": "bad_path",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-09",
+    "description": "wrong content type",
+    "source_ip": "10.10.1.19",
+    "request": {
+      "method": "POST",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid",
+        "content-type": "text/plain"
+      },
+      "body": "{}",
+      "sequence": null
+    },
+    "expected_status": 415,
+    "expected_reason": "bad_content_type",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-10",
+    "description": "oversized body",
+    "source_ip": "10.10.1.20",
+    "request": {
+      "method": "POST",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid",
+        "content-type": "application/json"
+      },
+      "body": {
+        "repeat": "x",
+        "count": 65537
+      },
+      "sequence": null
+    },
+    "expected_status": 413,
+    "expected_reason": "body_too_large",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-11",
+    "description": "rate limit burst",
+    "source_ip": "10.10.1.21",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": "21 requests without refill"
+    },
+    "expected_status": 429,
+    "expected_reason": "rate_limited",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-12",
+    "description": "repeated bad signature then ban",
+    "source_ip": "10.10.1.22",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": "four bad-signature requests followed by another request"
+    },
+    "expected_status": 403,
+    "expected_reason": "banned",
+    "backend_reached": false
+  },
+  {
+    "id": "SC-13",
+    "description": "ban expiry then valid request",
+    "source_ip": "10.10.1.23",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": "trigger ban, wait for expiry, then valid request"
+    },
+    "expected_status": 200,
+    "expected_reason": "allowed",
+    "backend_reached": true
+  },
+  {
+    "id": "SC-14",
+    "description": "reputation recovers below elevated",
+    "source_ip": "10.10.1.24",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid"
+      },
+      "body": null,
+      "sequence": "raise score to 40 then wait until below 40"
+    },
+    "expected_status": 200,
+    "expected_reason": "allowed",
+    "backend_reached": true
+  },
+  {
+    "id": "SC-15",
+    "description": "spoofed forwarding header ignored",
+    "source_ip": "10.10.1.25",
+    "request": {
+      "method": "GET",
+      "path": "/api/info",
+      "headers": {
+        "authorization": "valid",
+        "x-forwarded-for": "198.51.100.99"
+      },
+      "body": null,
+      "sequence": null
+    },
+    "expected_status": 200,
+    "expected_reason": "allowed",
+    "backend_reached": true
+  }
+]

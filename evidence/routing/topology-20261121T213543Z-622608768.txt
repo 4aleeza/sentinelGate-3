@@ -1,0 +1,272 @@
+COMMAND: bash scripts/topo_up.sh
+Sat Nov 21 21:35:45 UTC 2026
+Topology created.
+COMMAND: bash scripts/verify_topo.sh
+COMMAND: date -u
+Sat Nov 21 21:35:45 UTC 2026
+COMMAND: ip -n sg-client address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: sg-c0@if13: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether be:80:28:23:00:5d brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.1.10/24 scope global sg-c0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::bc80:28ff:fe23:5d/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-client route show
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+COMMAND: ip -n sg-r1 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: sg-r10@if14: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 3e:39:b2:72:d9:4e brd ff:ff:ff:ff:ff:ff link-netns sg-client
+    inet 10.10.1.1/24 scope global sg-r10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3c39:b2ff:fe72:d94e/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+16: sg-r11@if15: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ca:e0:50:3b:87:e2 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.2.1/24 scope global sg-r11
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c8e0:50ff:fe3b:87e2/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r1 route show
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+COMMAND: ip -n sg-r2 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+15: sg-r20@if16: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether a6:04:c3:7b:e4:74 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.2.2/24 scope global sg-r20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a404:c3ff:fe7b:e474/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+18: sg-r21@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 7a:c3:8f:78:28:d1 brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.3.1/24 scope global sg-r21
+       valid_lft forever preferred_lft forever
+    inet6 fe80::78c3:8fff:fe78:28d1/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r2 route show
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+COMMAND: ip -n sg-gateway address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+17: sg-g0@if18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 12:37:bd:59:d9:42 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.3.10/24 scope global sg-g0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1037:bdff:fe59:d942/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+20: sg-g1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8a:26:b8:cb:62:fa brd ff:ff:ff:ff:ff:ff link-netns sg-backend
+    inet 10.10.4.1/24 scope global sg-g1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8826:b8ff:fecb:62fa/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-gateway route show
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+COMMAND: ip -n sg-backend address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+19: sg-b0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8e:13:22:57:db:2e brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.4.10/24 scope global sg-b0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8c13:22ff:fe57:db2e/64 scope link tentative 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-backend route show
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client ping -c 3 -W 2 10.10.3.10
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=0.275 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.150 ms
+64 bytes from 10.10.3.10: icmp_seq=3 ttl=62 time=0.137 ms
+
+--- 10.10.3.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2053ms
+rtt min/avg/max/mdev = 0.137/0.187/0.275/0.062 ms
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 2 10.10.3.10
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  0.475 ms
+ 2  10.10.2.2  0.093 ms
+ 3  10.10.3.10  0.388 ms
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.4.10 (failure expected)
+PING 10.10.4.10 (10.10.4.10) 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+From 10.10.1.1 icmp_seq=2 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1031ms
+
+PASS: backend did not respond to ping.
+Topology verification passed.
+COMMAND: bash scripts/topo_up.sh (idempotence)
+COMMAND: date -u
+Sat Nov 21 21:35:49 UTC 2026
+COMMAND: ip -n sg-client address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: sg-c0@if13: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether be:80:28:23:00:5d brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.1.10/24 scope global sg-c0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::bc80:28ff:fe23:5d/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-client route show
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+COMMAND: ip -n sg-r1 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: sg-r10@if14: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 3e:39:b2:72:d9:4e brd ff:ff:ff:ff:ff:ff link-netns sg-client
+    inet 10.10.1.1/24 scope global sg-r10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3c39:b2ff:fe72:d94e/64 scope link 
+       valid_lft forever preferred_lft forever
+16: sg-r11@if15: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ca:e0:50:3b:87:e2 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.2.1/24 scope global sg-r11
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c8e0:50ff:fe3b:87e2/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r1 route show
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+COMMAND: ip -n sg-r2 address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+15: sg-r20@if16: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether a6:04:c3:7b:e4:74 brd ff:ff:ff:ff:ff:ff link-netns sg-r1
+    inet 10.10.2.2/24 scope global sg-r20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a404:c3ff:fe7b:e474/64 scope link 
+       valid_lft forever preferred_lft forever
+18: sg-r21@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 7a:c3:8f:78:28:d1 brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.3.1/24 scope global sg-r21
+       valid_lft forever preferred_lft forever
+    inet6 fe80::78c3:8fff:fe78:28d1/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-r2 route show
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+COMMAND: ip -n sg-gateway address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+17: sg-g0@if18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 12:37:bd:59:d9:42 brd ff:ff:ff:ff:ff:ff link-netns sg-r2
+    inet 10.10.3.10/24 scope global sg-g0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::1037:bdff:fe59:d942/64 scope link 
+       valid_lft forever preferred_lft forever
+20: sg-g1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8a:26:b8:cb:62:fa brd ff:ff:ff:ff:ff:ff link-netns sg-backend
+    inet 10.10.4.1/24 scope global sg-g1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8826:b8ff:fecb:62fa/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-gateway route show
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+COMMAND: ip -n sg-backend address show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+19: sg-b0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 8e:13:22:57:db:2e brd ff:ff:ff:ff:ff:ff link-netns sg-gateway
+    inet 10.10.4.10/24 scope global sg-b0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8c13:22ff:fe57:db2e/64 scope link 
+       valid_lft forever preferred_lft forever
+COMMAND: ip -n sg-backend route show
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 0
+COMMAND: ip netns exec sg-client ping -c 3 -W 2 10.10.3.10
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=0.061 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.149 ms
+64 bytes from 10.10.3.10: icmp_seq=3 ttl=62 time=0.118 ms
+
+--- 10.10.3.10 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2032ms
+rtt min/avg/max/mdev = 0.061/0.109/0.149/0.036 ms
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 2 10.10.3.10
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  0.076 ms
+ 2  10.10.2.2  0.061 ms
+ 3  10.10.3.10  0.044 ms
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.4.10 (failure expected)
+PING 10.10.4.10 (10.10.4.10) 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+From 10.10.1.1 icmp_seq=2 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1004ms
+
+PASS: backend did not respond to ping.
+Topology verification passed.
+Existing topology verified; no changes made.

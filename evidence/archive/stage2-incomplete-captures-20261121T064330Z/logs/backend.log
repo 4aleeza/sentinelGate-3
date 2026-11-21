@@ -1,0 +1,123 @@
+COMMAND: date -u
+Sat Nov 21 06:42:13 UTC 2026
+COMMAND: ip netns exec sg-backend /opt/venv/bin/uvicorn backend.app:app --host 10.10.4.10 --port 9000 --no-proxy-headers
+INFO:     Started server process [82]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.4.10:9000 (Press CTRL+C to quit)
+{"request_id": null, "peer": "10.10.4.10", "method": "GET", "path": "/health", "status": 200, "duration_ms": 1.0390870011178777}
+INFO:     10.10.4.10:38798 - "GET /health HTTP/1.1" 200 OK
+{"request_id": null, "peer": "10.10.4.1", "method": "GET", "path": "/health", "status": 200, "duration_ms": 0.9077630093088374}
+INFO:     10.10.4.1:47113 - "GET /health HTTP/1.1" 200 OK
+{"request_id": "cccb2badb6d14c729b5cee559444e17a", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.7814400014467537}
+INFO:     10.10.4.1:47113 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "0ee630d418f14f258292e135d0367896", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.7878409960540012}
+INFO:     10.10.4.1:47113 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "8215a9d8c8fa4470b12bdb844c96125b", "peer": "10.10.4.1", "method": "POST", "path": "/api/echo", "status": 200, "duration_ms": 1.7478149966336787}
+INFO:     10.10.4.1:47113 - "POST /api/echo HTTP/1.1" 200 OK
+{"request_id": "29938621ec6c4fcc9758fb7080669fe7", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 201.8132399971364}
+INFO:     10.10.4.1:47113 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "29663fa857ab412bb50260c8e62b0944", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 201.21343299979344}
+INFO:     10.10.4.1:46901 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "df0eafbda4ba4e21a66fc850f12181a5", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 203.88151300721802}
+INFO:     10.10.4.1:57925 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "156cf9ab8be34dd48c1244cc2abd383d", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 206.31515099375974}
+INFO:     10.10.4.1:35665 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "05b7b1ec85a44bb299045342514f5129", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 201.27054200565908}
+INFO:     10.10.4.1:57923 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9d0d71cdfac54cf2a1221b60d8a84042", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 203.14288001100067}
+INFO:     10.10.4.1:51095 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "adc19b60813a4bc7a71086c9e70e3bab", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 205.1961490069516}
+INFO:     10.10.4.1:34981 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9d2797fb5c3940cb818e594218499b5a", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 205.88297299400438}
+INFO:     10.10.4.1:42731 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "20baa9decebc46259c6fffdaa1375e61", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 208.36542001052294}
+INFO:     10.10.4.1:56099 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "699545da36974ff5880da70e4a56b1c7", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 210.09593200869858}
+INFO:     10.10.4.1:36473 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "d9fac85c17f94f939b070c605a118fcc", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 211.06390599743463}
+INFO:     10.10.4.1:40167 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "1aeb003d2a6349fa94914f15c8ffd5f3", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 212.9634479933884}
+INFO:     10.10.4.1:35147 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "5b56a9e6e1734f31aacd5bfde41a1da2", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 214.2707830062136}
+INFO:     10.10.4.1:60645 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "36c817dd69c14bd7aab6404d68d7fef1", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 202.97134900465608}
+INFO:     10.10.4.1:37565 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "fd7a5e604d11451e8ecc1b07364abd33", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 204.45061598729808}
+INFO:     10.10.4.1:52885 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "270efc23c6ec48118058714e33f1bf54", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 206.59980201162398}
+INFO:     10.10.4.1:60287 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "05364f5096d14d1db44e46bc9d5a4bee", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 211.02269900438841}
+INFO:     10.10.4.1:39633 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9fc20a815ffe484086f3c5ebe0f67962", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 228.94202600582503}
+INFO:     10.10.4.1:35411 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "e4509d5c591646a28b3537e3a5419cb5", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 230.94388699973933}
+INFO:     10.10.4.1:37685 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f411b1e91b2b47ea82e810b4ab3a68ed", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 233.1991920073051}
+INFO:     10.10.4.1:39479 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "7fac751da0fe46ac82ee151cdd28073b", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 235.36178198992275}
+INFO:     10.10.4.1:53851 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "4cc82273fec642a194c448a1b4b813dc", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 225.4429960012203}
+INFO:     10.10.4.1:44769 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "2f1002b3253e48ee8a43138d462b9d46", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 224.4355139991967}
+INFO:     10.10.4.1:60051 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "56d0de2d591f4f3492349890a9676503", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 226.37166301137768}
+INFO:     10.10.4.1:52561 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "3353d213ff484e4eabb3e2fd45101cb9", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 228.43573399586603}
+INFO:     10.10.4.1:51599 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "773af5de0ce749899a7fa8f955b871e8", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 230.3845860005822}
+INFO:     10.10.4.1:43297 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "2d5c9caf0c5745d19ab5562a712a8b06", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 231.94656700070482}
+INFO:     10.10.4.1:33433 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "edac6b44bdc54ea7a2eadf2e91f62433", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 235.24886200902984}
+INFO:     10.10.4.1:57875 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "8d15519fd3604a14b117c73c0ad1375e", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 236.29695001000073}
+INFO:     10.10.4.1:40519 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "89080957dc8a4a36aed95b23a231c95f", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 239.2274779995205}
+INFO:     10.10.4.1:53605 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "ccfc19d38e3d4e518e921b2439bdc3e3", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 242.14110300817993}
+INFO:     10.10.4.1:40543 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "b3071f12044144f8b84f18355ff91fc9", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 243.9992369909305}
+INFO:     10.10.4.1:44049 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "ac8ee90b91b44c4f8530bb8073319e4c", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 259.65175600140356}
+INFO:     10.10.4.1:44199 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "0a430319b3dc4cd8b6b0d4fc720cd091", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 260.7222480000928}
+INFO:     10.10.4.1:36145 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "3014135a9cd9458795cbc5e334d03b55", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 262.6183899992611}
+INFO:     10.10.4.1:35709 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "6673b705d0e24ef681650908ed6575f1", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 264.42831600434147}
+INFO:     10.10.4.1:48649 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "917b6356c1c94dfc8404e5e1acf58355", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 266.40307100024074}
+INFO:     10.10.4.1:48269 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "27cc3cd1c6e9406c830af26c00504130", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 268.0979769938858}
+INFO:     10.10.4.1:33109 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "426b162fe0dc4a6589b6094f2300d52c", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 260.0191219971748}
+INFO:     10.10.4.1:55531 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "59fb3f1bc68d454e8a2f19794dc5d660", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 261.80234301136807}
+INFO:     10.10.4.1:54019 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "9b9251aa1df8467f8ac3d0ccad7cb3e5", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 258.90552101191133}
+INFO:     10.10.4.1:35791 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "694cf47db745417ca3249eeeae407145", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 260.3831870073918}
+INFO:     10.10.4.1:42283 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "a9a2797d8bd24e57a99c257bdc19f317", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 262.1255010017194}
+INFO:     10.10.4.1:40095 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "0832830f24754681aa976dea675da494", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 263.8655140035553}
+INFO:     10.10.4.1:46719 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f3215e6fa46a417aa9778f5a9d38226b", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 265.70764600182883}
+INFO:     10.10.4.1:37545 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "19e04d7f6195440382dcc2a90e59b11e", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 267.5969860138139}
+INFO:     10.10.4.1:37631 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "f1d8a762bf6f4e6e886da59426fc9a43", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 268.66557900211774}
+INFO:     10.10.4.1:38163 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "b345ed6753434664940456681fe2ec5d", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 270.0162219989579}
+INFO:     10.10.4.1:53003 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "99e83f2df6d14191bed319c62ee56441", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 271.7345310084056}
+INFO:     10.10.4.1:45035 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "67401a5118184b6ea15e3ac81dcda4b7", "peer": "10.10.4.1", "method": "GET", "path": "/api/slow", "status": 200, "duration_ms": 273.3945310028503}
+INFO:     10.10.4.1:39945 - "GET /api/slow?ms=200 HTTP/1.1" 200 OK
+{"request_id": "1d77e6ef2dcf4931a8138fc929b4fd8b", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.5263079947326332}
+INFO:     10.10.4.1:47113 - "GET /api/info HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [82]

@@ -1,0 +1,17 @@
+UTC: 2026-11-21T21:58:39.928278+00:00
+COMMAND: tshark -r /work/evidence/captures/stage5/20261121T215817Z/P-04/P3.pcapng -d tcp.port==8000,http -d tcp.port==9000,http -T fields -E header=y -E separator=, -E quote=d -E occurrence=a -e frame.number -e frame.time_epoch -e frame.len -e frame.cap_len -e ip.src -e ip.dst -e ip.ttl -e ip.proto -e icmp.type -e icmp.code -e tcp.srcport -e tcp.dstport -e tcp.stream -e tcp.flags.str -e tcp.seq -e tcp.ack -e http.request.method -e http.request.uri -e http.response.code -e http.request.line
+DERIVED TEXT; stderr: Running as user "root" and group "root". This could be dangerous.
+
+frame.number,frame.time_epoch,frame.len,frame.cap_len,ip.src,ip.dst,ip.ttl,ip.proto,icmp.type,icmp.code,tcp.srcport,tcp.dstport,tcp.stream,tcp.flags.str,tcp.seq,tcp.ack,http.request.method,http.request.uri,http.response.code,http.request.line
+"1","1795298315.473159394","74","74","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","··········S·","0","0",,,,
+"2","1795298315.473175897","74","74","10.10.3.10","10.10.1.14","64","6",,,"8000","45996","0","·······A··S·","0","1",,,,
+"3","1795298315.473224605","66","66","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······A····","1","1",,,,
+"4","1795298315.473372530","468","468","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······AP···","1","1","GET","/api/info",,"Host: 10.10.3.10:8000\r\n,User-Agent: curl/8.5.0\r\n,Accept: */*\r\n,X-Request-ID: sg-p-04-5ca802729522\r\n,Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsYWItdXNlciIsImlhdCI6MTc5NTI5ODMwMCwiZXhwIjoxNzk1Mjk4NjAwLCJpc3MiOiJzZW50aW5lbGdhdGUtbGFiIiwiYXVkIjoic2VudGluZWxnYXRlLWFwaSIsInNjb3BlIjoiYXBpOnJlYWQgYXBpOndyaXRlIn0.hADXAWr_WvDsITokDzEIMzEUlEh4mAF2fjSGrFJDXz0\r\n"
+"5","1795298315.473381031","66","66","10.10.3.10","10.10.1.14","64","6",,,"8000","45996","0","·······A····","1","403",,,,
+"6","1795298315.481648004","263","263","10.10.3.10","10.10.1.14","64","6",,,"8000","45996","0","·······AP···","1","403",,,,
+"7","1795298315.481842036","66","66","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······A····","403","198",,,,
+"8","1795298315.481927450","127","127","10.10.3.10","10.10.1.14","64","6",,,"8000","45996","0","·······AP···","198","403",,,"401",
+"9","1795298315.481998362","66","66","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······A····","403","259",,,,
+"10","1795298315.482250504","66","66","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······A···F","403","259",,,,
+"11","1795298315.482529750","66","66","10.10.3.10","10.10.1.14","64","6",,,"8000","45996","0","·······A···F","259","404",,,,
+"12","1795298315.482580859","66","66","10.10.1.14","10.10.3.10","62","6",,,"45996","8000","0","·······A····","404","260",,,,

@@ -1,0 +1,38 @@
+[
+  {
+    "source": "10.10.1.17",
+    "path": "/monitor/summary",
+    "method": "GET",
+    "variant": null,
+    "status": 401,
+    "expected": 401,
+    "request_id": "3e396630842f4cb0a779ec7be65423c8"
+  },
+  {
+    "source": "10.10.1.18",
+    "path": "/monitor/summary",
+    "method": "GET",
+    "variant": "valid",
+    "status": 403,
+    "expected": 403,
+    "request_id": "4c705a5af1f248f8951880cb0bd6fa28"
+  },
+  {
+    "source": "10.10.1.19",
+    "path": "/monitor/summary",
+    "method": "POST",
+    "variant": "monitor",
+    "status": 405,
+    "expected": 405,
+    "request_id": "cf1cf6891d32417ab8db523d41174119"
+  },
+  {
+    "source": "10.10.1.20",
+    "path": "/api/info",
+    "method": "GET",
+    "variant": "monitor",
+    "status": 403,
+    "expected": 403,
+    "request_id": "754af95754c7449d9ab95400d4370237"
+  }
+]
