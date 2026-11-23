@@ -1,0 +1,22 @@
+UTC: 2026-11-23T04:04:00.366743+00:00
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.20 --max-time 8 --silent --show-error --include --header 'X-Request-ID: sg-p10-cedc012c9772' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 200 OK
+date: Mon, 23 Nov 2026 04:03:59 GMT
+server: uvicorn
+date: Mon, 23 Nov 2026 04:03:59 GMT
+server: uvicorn
+content-type: application/json
+content-length: 183
+x-request-id: sg-p10-cedc012c9772
+
+{"peer_host":"10.10.4.1","peer_port":55867,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.20","x_request_id":"sg-p10-cedc012c9772","timestamp":"2026-11-23T04:04:00.330447+00:00"}HTTP/1.1 200 OK
+date: Mon, 23 Nov 2026 04:03:59 GMT
+server: uvicorn
+date: Mon, 23 Nov 2026 04:03:59 GMT
+server: uvicorn
+content-type: application/json
+content-length: 183
+x-request-id: sg-p10-cedc012c9772
+
+{"peer_host":"10.10.4.1","peer_port":55867,"host":"10.10.4.10:9000","x_forwarded_for":"10.10.1.20","x_request_id":"sg-p10-cedc012c9772","timestamp":"2026-11-23T04:04:00.351856+00:00"}

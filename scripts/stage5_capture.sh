@@ -4,16 +4,22 @@ cd /work
 export SENTINELGATE_JWT_SECRET="$(python -c 'import secrets; print(secrets.token_hex(32))')"
 export SG_BUCKET_REFILL_PER_SECOND=0.001
 export SG_BAN_BASE_SECONDS=30
-mkdir -p evidence/captures/stage5 evidence/routing/stage5
 stamp=$(date -u +%Y%m%dT%H%M%SZ)
+archive="evidence/archive/stage5-$stamp"
+mkdir -p "$archive" evidence/captures evidence/routing
+# Preserve prior runs, published manifest/profile, routing evidence, and overwritten logs.
+for path in evidence/captures/stage5 evidence/routing/stage5 evidence/logs/stage5_pytest.txt docs/packet_evidence.md evidence/logs/gateway.log evidence/logs/backend.log; do
+  if [[ -e $path ]]; then
+    mkdir -p "$archive/$(dirname "$path")"
+    cp -a "$path" "$archive/$path"
+  fi
+done
+mkdir -p evidence/captures/stage5 evidence/routing/stage5
 export STAGE5_DIR="evidence/captures/stage5/$stamp"
 mkdir -p "$STAGE5_DIR"
 exec > >(tee "$STAGE5_DIR/run.txt") 2>&1
 echo 'COMMAND: date -u'; date -u
-mkdir -p "$STAGE5_DIR/prior_service_logs"
-for file in evidence/logs/gateway.log evidence/logs/backend.log; do
-  [[ ! -f $file ]] || cp -p "$file" "$STAGE5_DIR/prior_service_logs/"
-done
+echo "Previous Stage 5 evidence and service logs archived in $archive"
 echo 'COMMAND: bash scripts/stage2_up.sh'
 echo 'Overrides: SG_BUCKET_REFILL_PER_SECOND=0.001 SG_BAN_BASE_SECONDS=30'
 cleanup() { bash scripts/sg-case-addresses.sh down || true; bash scripts/stage2_down.sh || true; bash scripts/topo_down.sh || true; }

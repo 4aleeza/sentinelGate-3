@@ -1,0 +1,6 @@
+UTC: 2026-11-23T03:07:19.592553+00:00
+COMMAND: ip netns exec sg-gateway dumpcap -i sg-g0 -s 262144 -f 'tcp port 8000 or tcp port 9000 or icmp' -w /work/evidence/captures/stage5/20261123T030641Z/P-05/P3.pcapng
+Capturing on 'sg-g0'
+File: /work/evidence/captures/stage5/20261123T030641Z/P-05/P3.pcapng
+Packets: 1 Packets: 12 Packets captured: 12
+Packets received/dropped on interface 'sg-g0': 12/0 (pcap:0/dumpcap:0/flushed:0/ps_ifdrop:0) (100.0%)

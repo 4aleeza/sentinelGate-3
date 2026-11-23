@@ -1,0 +1,15 @@
+# Stage 6 experiment design
+
+Status: design in progress; no experiment results are claimed.
+
+Conditions install netem on R1 `sg-r11` egress toward R2, in the client-to-gateway direction only: baseline 0%, loss2 2%, loss5 5%. Delete and re-add for each run; record seed, command and qdisc counters before and after, and relevant veth offload settings. Verify seed support before runs. Five runs per condition are interleaved using a recorded shuffle seed, with distinct recorded netem seeds; invalid runs are retained and replaced.
+
+Each full workload uses fresh gateway and backend state, default security thresholds, client address 10.10.1.200, 200 sequential POST /api/echo requests with a fixed 8 KiB JSON body, new connection and Connection: close, 15-second total timeout, no retries, at least 250 ms between starts, and a valid short-lived token. Pilot runs use 50 requests and are labelled pilot. A success requires status 200 and a matching echoed-payload hash. Record each request's identity, UTC and monotonic start, outcome, status, total/connect/first-byte timing where available, response bytes and error. Goodput is successful response-body bytes divided by elapsed monotonic time from the first request start to completion of the final request. Report success rate and successful-request latency mean, median, p95, p99 and max; count errors and timeouts separately. A 429 invalidates the workload run.
+
+Under the same qdisc, restart services with SG_BAN_BASE_SECONDS=10 and SG_BUCKET_REFILL_PER_SECOND=0.001 and run SC-01 through SC-15 from their case addresses, with 15-second timeout and no retries. Record client outcome, expected status and backend reach, gateway final-outcome logs and backend logs separately. Loss may prevent the client seeing a response even when the server processed the request.
+
+Capture headers at client sg-c0 (P1, before netem) and R2 sg-r20 (P2, after netem), snaplen 96, both directions, with capture drop counts. Record client and gateway nstat deltas, workload monitor snapshots and structured logs. Report separately: qdisc dropped/(sent+dropped), 1 minus forward P2/P1 packet count, and P1 TCP retransmissions relative to TCP data packets. Qdisc counters may reflect offload aggregation, P1/P2 counts include ACK-only packets, and small samples are noisy. Captures at or after egress do not include dropped packets.
+
+Validity requires expected qdisc settings and zero initial counters, zero capture drops, no workload 429, healthy services throughout and all requests issued. Preserve failures with reasons. Results are descriptive: per run, and condition mean, sample standard deviation (n-1), and min-max across valid runs. Maintain raw run files, SHA-256 manifest, commands and UTC timestamps. Cleanup verifies qdiscs, project namespaces, interfaces, addresses and capture processes directly.
+
+Limitations: virtual veth links share one kernel and Docker host CPU; Bernoulli loss is applied in only one direction at one interface; five runs support descriptive statistics only; offload affects packet counts; the benign workload is paced to avoid rate limiting.

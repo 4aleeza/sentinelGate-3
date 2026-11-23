@@ -1,0 +1,59 @@
+COMMAND: date -u
+Mon Nov 23 03:06:43 UTC 2026
+COMMAND: ip netns exec sg-backend /opt/venv/bin/uvicorn backend.app:app --host 10.10.4.10 --port 9000 --no-proxy-headers --forwarded-allow-ips '' --workers 1
+INFO:     Started server process [134]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.4.10:9000 (Press CTRL+C to quit)
+{"request_id": "sg-p-01-f9d9194ba78d", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6437279953388497}
+INFO:     10.10.4.1:47063 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p-02-ca9b5a36e620", "peer": "10.10.4.1", "method": "POST", "path": "/api/info", "status": 405, "duration_ms": 0.8280350011773407}
+INFO:     10.10.4.1:36975 - "POST /api/info HTTP/1.1" 405 Method Not Allowed
+{"request_id": "sg-p07-ae635e29f0a5", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.49758999759797}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-65f08c9085db", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.55279000318842}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-4c324a2baaca", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.8267939992947504}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-e821c6f1ea13", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.9016940020956099}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-776c0a4b130c", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.37939799949526787}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-1c1b09931c60", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.44259699643589556}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-52a9666602b6", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.534696999238804}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-5f5ba87d654f", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6138960015960038}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-7afdb5253601", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.5897959999856539}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-e10d2b0f8e92", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6241959999897517}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-dee2f39b5e6b", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6382960054907016}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-22f5871f2219", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.1682929980452172}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-00dc43813b31", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6890959994052537}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-a6ad2fd4d910", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.534790004370734}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-714efd51be0c", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.478489997680299}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-bd14c66f7f8d", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.9473940008319914}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-2e3e5706613e", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6573960054083727}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-ea651a08c092", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.705095000739675}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-93cc13720cb5", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.880687996163033}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p07-05f585c1f3a8", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 1.1657930008368567}
+INFO:     10.10.4.1:58293 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p10-c4f24281a035", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.6088430018280633}
+INFO:     10.10.4.1:43409 - "GET /api/info HTTP/1.1" 200 OK
+{"request_id": "sg-p10-c4f24281a035", "peer": "10.10.4.1", "method": "GET", "path": "/api/info", "status": 200, "duration_ms": 0.45073199726175517}
+INFO:     10.10.4.1:43409 - "GET /api/info HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [134]

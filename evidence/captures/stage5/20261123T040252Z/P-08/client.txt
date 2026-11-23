@@ -1,0 +1,13 @@
+UTC: 2026-11-23T04:03:50.741437+00:00
+COMMAND: request while previously banned
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.18 --max-time 8 --silent --show-error --include --path-as-is --header 'X-Request-ID: sg-p08-5dca987d519e' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 403 Forbidden
+date: Mon, 23 Nov 2026 04:03:49 GMT
+server: uvicorn
+retry-after: 30
+content-length: 53
+content-type: application/json
+x-request-id: sg-p08-5dca987d519e
+
+{"error":"banned","request_id":"sg-p08-5dca987d519e"}

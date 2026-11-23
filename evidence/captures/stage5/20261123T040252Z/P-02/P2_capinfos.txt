@@ -1,0 +1,37 @@
+UTC: 2026-11-23T04:03:21.703419+00:00
+COMMAND: capinfos /work/evidence/captures/stage5/20261123T040252Z/P-02/P2.pcapng
+File name:           /work/evidence/captures/stage5/20261123T040252Z/P-02/P2.pcapng
+File type:           Wireshark/... - pcapng
+File encapsulation:  Ethernet
+File timestamp precision:  nanoseconds (9)
+Packet size limit:   file hdr: (not set)
+Number of packets:   12
+File size:           2416 bytes
+Data size:           1557 bytes
+Capture duration:    0.046011017 seconds
+First packet time:   2026-11-23 04:03:18.503410800
+Last packet time:    2026-11-23 04:03:18.549421817
+Data byte rate:      33 kBps
+Data bit rate:       270 kbps
+Average packet size: 129.75 bytes
+Average packet rate: 260 packets/s
+SHA256:              b0de3ba838de08d576df5af0379580430f99a3953ad3fd9e94f5c05bbf61d580
+SHA1:                3f43c5646a183dee3775b96b87ace73ea66dad9a
+Strict time order:   True
+Capture hardware:    Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz (with SSE4.2)
+Capture oper-sys:    Linux 6.18.58.1-microsoft-standard-WSL2
+Capture application: Dumpcap (Wireshark) 4.2.2 (Git v4.2.2 packaged as 4.2.2-1.1build3)
+Number of interfaces in file: 1
+Interface #0 info:
+                     Name = sg-r11
+                     Encapsulation = Ethernet (1 - ether)
+                     Capture length = 262144
+                     Time precision = nanoseconds (9)
+                     Time ticks per second = 1000000000
+                     Time resolution = 0x09
+                     Filter string = tcp port 8000 or tcp port 9000 or icmp
+                     Operating system = Linux 6.18.58.1-microsoft-standard-WSL2
+                     Number of stat entries = 1
+                     Number of packets = 12
+
+EXIT: 0

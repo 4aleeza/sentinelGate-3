@@ -1,0 +1,7 @@
+UTC: 2026-11-21T21:58:34.913103+00:00
+COMMAND: tshark -r /work/evidence/captures/stage5/20261121T215817Z/P-03/P4.pcapng -d tcp.port==8000,http -d tcp.port==9000,http -T fields -E header=y -E separator=, -E quote=d -E occurrence=a -e frame.number -e frame.time_epoch -e frame.len -e frame.cap_len -e ip.src -e ip.dst -e ip.ttl -e ip.proto -e icmp.type -e icmp.code -e tcp.srcport -e tcp.dstport -e tcp.stream -e tcp.flags.str -e tcp.seq -e tcp.ack -e http.request.method -e http.request.uri -e http.response.code -e http.request.line
+DERIVED TEXT; stderr: Running as user "root" and group "root". This could be dangerous.
+
+frame.number,frame.time_epoch,frame.len,frame.cap_len,ip.src,ip.dst,ip.ttl,ip.proto,icmp.type,icmp.code,tcp.srcport,tcp.dstport,tcp.stream,tcp.flags.str,tcp.seq,tcp.ack,http.request.method,http.request.uri,http.response.code,http.request.line
+"1","1795298310.578515903","66","66","10.10.4.10","10.10.4.1","64","6",,,"9000","54495","0","·······A···F","1","1",,,,
+"2","1795298310.621078349","66","66","10.10.4.1","10.10.4.10","64","6",,,"54495","9000","0","·······A····","1","2",,,,

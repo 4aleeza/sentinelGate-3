@@ -1,0 +1,14 @@
+UTC: 2026-11-23T04:03:18.012563+00:00
+COMMAND: tshark -r /work/evidence/captures/stage5/20261123T040252Z/P-01/P4.pcapng -d tcp.port==8000,http -d tcp.port==9000,http -T fields -E header=y -E separator=, -E quote=d -E occurrence=a -e frame.number -e frame.time_epoch -e frame.len -e frame.cap_len -e ip.src -e ip.dst -e ip.ttl -e ip.proto -e icmp.type -e icmp.code -e tcp.srcport -e tcp.dstport -e tcp.stream -e tcp.flags.str -e tcp.seq -e tcp.ack -e http.request.method -e http.request.uri -e http.response.code -e http.request.line
+DERIVED TEXT; stderr: Running as user "root" and group "root". This could be dangerous.
+
+frame.number,frame.time_epoch,frame.len,frame.cap_len,ip.src,ip.dst,ip.ttl,ip.proto,icmp.type,icmp.code,tcp.srcport,tcp.dstport,tcp.stream,tcp.flags.str,tcp.seq,tcp.ack,http.request.method,http.request.uri,http.response.code,http.request.line
+"1","1795406589.765762214","74","74","10.10.4.1","10.10.4.10","64","6",,,"60281","9000","0","··········S·","0","0",,,,
+"2","1795406589.765782716","74","74","10.10.4.10","10.10.4.1","64","6",,,"9000","60281","0","·······A··S·","0","1",,,,
+"3","1795406589.765796517","66","66","10.10.4.1","10.10.4.10","64","6",,,"60281","9000","0","·······A····","1","1",,,,
+"4","1795406589.768376347","273","273","10.10.4.1","10.10.4.10","64","6",,,"60281","9000","0","·······AP···","1","1","GET","/api/info",,"Host: 10.10.4.10:9000\r\n,Accept-Encoding: gzip, deflate\r\n,Connection: keep-alive\r\n,user-agent: curl/8.5.0\r\n,accept: */*\r\n,X-Forwarded-For: 10.10.1.11\r\n,X-Request-ID: sg-p-01-4372485690c1\r\n"
+"5","1795406589.768444053","66","66","10.10.4.10","10.10.4.1","64","6",,,"9000","60281","0","·······A····","1","208",,,,
+"6","1795406589.794279857","192","192","10.10.4.10","10.10.4.1","64","6",,,"9000","60281","0","·······AP···","1","208",,,,
+"7","1795406589.794323761","66","66","10.10.4.1","10.10.4.10","64","6",,,"60281","9000","0","·······A····","208","127",,,,
+"8","1795406589.794506777","250","250","10.10.4.10","10.10.4.1","64","6",,,"9000","60281","0","·······AP···","127","208",,,"200",
+"9","1795406589.794512278","66","66","10.10.4.1","10.10.4.10","64","6",,,"60281","9000","0","·······A····","208","311",,,,

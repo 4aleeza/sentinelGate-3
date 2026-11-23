@@ -11,7 +11,12 @@ def ids(rs):
     return set(re.findall(r'X-Request-ID: ([A-Za-z0-9-]+)', ' '.join(r['http.request.line'] for r in rs), re.I))
 def readmanifest(): return list(csv.DictReader((out/'MANIFEST.csv').open(newline='')))
 manifest=readmanifest()
+runlog=(out/'run.txt').read_text(encoding='utf-8')
+match=re.search(r'^Overrides: (.+)$',runlog,re.M)
+if not match: raise RuntimeError('configuration overrides missing from run log')
+overrides=match.group(1)
 for m in manifest:
+    m['configuration_overrides']=overrides
     p=out/m['scenario']/(m['point']+'_capinfos.txt'); s=p.read_text()
     def field(k):
         match=re.search(r'^'+re.escape(k)+r':\s*(.*)$',s,re.M)
@@ -63,9 +68,9 @@ profile=out/'wireshark_profile';profile.mkdir(exist_ok=True)
 (profile/'decode_as_entries').write_text('decode_as_entry: tcp.port,8000,(none),http\ndecode_as_entry: tcp.port,9000,(none),http\n')
 (profile/'preferences').write_text('gui.column.format: "No.", "%m", "Source", "%Cus:ip.src:0:R", "Destination", "%Cus:ip.dst:0:R", "TTL", "%Cus:ip.ttl:0:R", "Src port", "%Cus:tcp.srcport:0:R", "Dst port", "%Cus:tcp.dstport:0:R", "Stream", "%Cus:tcp.stream:0:R", "Flags", "%Cus:tcp.flags.str:0:R", "Seq", "%Cus:tcp.seq:0:R", "Ack", "%Cus:tcp.ack:0:R", "Method", "%Cus:http.request.method:0:R", "URI", "%Cus:http.request.uri:0:R", "Status", "%Cus:http.response.code:0:R", "Info", "%i"\n')
 guide=['# Stage 5 packet evidence','',f'Run: `{out.relative_to(root)}`. Generated from the real tshark field exports; pcapng files are private and contain disposable bearer tokens. Times are UTC. TCP stream numbers are local to each capture.','',
-'Install the wireshark_profile directory as a Wireshark profile via Edit > Configuration Profiles > Import, or copy it into the personal Wireshark profiles directory and select it. If decode-as entries do not load, use Analyze > Decode As and set TCP ports 8000 and 9000 to HTTP. The profile was checked with tshark; graphical Wireshark was not available.','',
+'Install the wireshark_profile directory as a Wireshark profile via Edit > Configuration Profiles > Import, or copy it into the personal Wireshark profiles directory and select it. If decode-as entries do not load, use Analyze > Decode As and set TCP ports 8000 and 9000 to HTTP.','',
 'In screenshots hide or mask Authorization values; leave raw pcapng files unchanged. For each selected packet annotate source/destination IP and ports, TTL, TCP flags, relative seq/ack, method/URI or status, request ID and X-Forwarded-For where present.','',
-'P-01 proves the proxy boundary. The request packets and tuples are in verification.csv. P1/P2/P3 show the same connection after successive routers; P4 is the gatewayÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢s independently originated connection. Captures of already-established connections need not include a handshake.','']
+'See verification.csv for capture-derived findings. Stream numbers are local to each file.','']
 for i in range(1,11):
  c=f'P-{i:02}';guide += [f'## {c}','',f'Client output: `{out.relative_to(root) / c / "client.txt"}`.','']
  for p in ('P1','P2','P3','P4'):
@@ -73,8 +78,11 @@ for i in range(1,11):
   filt='icmp || tcp.port == 9000' if i==9 else ('tcp.port == 9000' if p=='P4' else 'tcp.port == 8000')
   guide.append(f'- {p}: `{out.relative_to(root) / c / (p+".pcapng")}`; {len(rs)} packets. Filter: `{filt}`. Request frames {requests}, response frames {responses}, SYN frames {syn}, FIN frames {fins}. Screenshot suggestion: `evidence/screenshots/{c}-{p}-exchange.png`. '+('No packets were captured at this point.' if not rs else 'Inspect the listed frames and packet details; see the matching summary CSV.'))
  guide.append('')
-guide += ['## Findings and limits','', 'P-09: R1 (10.10.1.1) sent ICMP destination unreachable, type 3 code 0; P2ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œP4 contain no packets for the attempt.', 'P-07: the P4 capture contains the earlier successful burst requests; use the final 429 request ID to distinguish the rejected request. P-03 P4 contains a prior connection FIN/ACK, not an HTTP request for the rejected ID.', 'P-10 uses one request ID for two sequential requests; P4 request frames show the same stream and source port, demonstrating upstream connection reuse in this run.','', 'P-01 handshake/teardown: use the SYN and FIN frame numbers above, and the accompanying CSV for the exact relative sequence and acknowledgement numbers. HTTP fields are visible only after TCP reassembly where required.']
-(root/'docs/packet_evidence.md').write_text('\n'.join(guide)+'\n')
+guide += ['## Findings and limits', '', 'The following results are derived from this run’s capture summaries:', '']
+for check in checks:
+ guide.append(f"- {check['check']}: {check['result']} — {check['details']}")
+guide += ['', 'P-01: use the listed SYN, request, response and FIN frames and the matching summary for sequence and acknowledgement numbers. HTTP fields may require TCP reassembly.']
+(root/'docs/packet_evidence.md').write_text('\n'.join(guide)+'\n',encoding='utf-8')
 shutil.copyfile(out/'MANIFEST.csv',out.parent/'MANIFEST.csv')
 shutil.copytree(profile,out.parent/'wireshark_profile',dirs_exist_ok=True)
 print(json.dumps(checks,indent=2))

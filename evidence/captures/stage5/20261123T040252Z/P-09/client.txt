@@ -1,0 +1,25 @@
+UTC: 2026-11-23T04:03:55.289919+00:00
+COMMAND: ping and curl direct to backend
+COMMAND: ip netns exec sg-client ping -I 10.10.1.19 -c 1 -W 2 10.10.4.10
+EXIT: 1
+PING 10.10.4.10 (10.10.4.10) from 10.10.1.19 : 56(84) bytes of data.
+From 10.10.1.1 icmp_seq=1 Destination Net Unreachable
+
+--- 10.10.4.10 ping statistics ---
+1 packets transmitted, 0 received, +1 errors, 100% packet loss, time 0ms
+
+
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.19 --max-time 3 -v http://10.10.4.10:9000/health
+EXIT: 7
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 10.10.4.10:9000...
+* Name '10.10.1.19' family 2 resolved to '10.10.1.19' family 2
+* Local port: 0
+* connect to 10.10.4.10 port 9000 from 10.10.1.19 port 45446 failed: Network is unreachable
+* Failed to connect to 10.10.4.10 port 9000 after 1 ms: Couldn't connect to server
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+* Closing connection
+curl: (7) Failed to connect to 10.10.4.10 port 9000 after 1 ms: Couldn't connect to server

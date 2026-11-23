@@ -1,0 +1,6 @@
+UTC: 2026-11-21T21:58:20.640156+00:00
+COMMAND: ip netns exec sg-r1 dumpcap -i sg-r11 -s 262144 -f 'tcp port 8000 or tcp port 9000 or icmp' -w /work/evidence/captures/stage5/20261121T215817Z/P-01/P2.pcapng
+Capturing on 'sg-r11'
+File: /work/evidence/captures/stage5/20261121T215817Z/P-01/P2.pcapng
+Packets: 1 Packets: 12 Packets captured: 12
+Packets received/dropped on interface 'sg-r11': 12/0 (pcap:0/dumpcap:0/flushed:0/ps_ifdrop:0) (100.0%)

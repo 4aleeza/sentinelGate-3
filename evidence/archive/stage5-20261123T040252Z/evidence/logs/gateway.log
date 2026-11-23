@@ -1,0 +1,117 @@
+COMMAND: date -u
+Mon Nov 23 03:06:45 UTC 2026
+COMMAND: ip netns exec sg-gateway /opt/venv/bin/uvicorn gateway.app:app --host 10.10.3.10 --port 8000 --no-proxy-headers --forwarded-allow-ips '' --workers 1
+INFO:     Started server process [166]
+INFO:     Waiting for application startup.
+{"event": "security_config", "config": {"bucket_capacity": 20.0, "bucket_refill_per_second": 0.001, "elevated_factor": 0.5, "elevated_threshold": 40.0, "ban_threshold": 70.0, "score_max": 100.0, "decay_per_second": 0.5, "ban_base_seconds": 30.0, "ban_max_seconds": 240.0, "offence_memory_seconds": 600.0, "probation_score": 30.0, "max_ips": 10000, "idle_seconds": 900.0, "max_token_bytes": 4096, "max_claim_bytes": 256, "max_path_bytes": 256, "max_query_bytes": 512, "max_query_params": 20, "max_headers": 50, "max_header_value_bytes": 2048, "max_body_bytes": 65536, "max_path_pattern_chars": 200, "jwt_leeway_seconds": 5.0, "issuer": "sentinelgate-lab", "audience": "sentinelgate-api", "points_rate_limited": 5.0, "points_missing_token": 5.0, "points_malformed_token": 10.0, "points_expired_token": 5.0, "points_bad_claims": 10.0, "points_insufficient_scope": 5.0, "points_bad_request": 10.0, "points_bad_method": 10.0, "points_bad_path": 10.0, "points_bad_content_type": 10.0, "points_body_too_large": 10.0, "points_suspicious_pattern": 15.0, "points_bad_signature": 20.0, "points_bad_algorithm": 40.0}, "secret": "[redacted]"}
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://10.10.3.10:8000 (Press CTRL+C to quit)
+{"timestamp": "2026-11-23T03:06:48.568774+00:00", "request_id": "fe7b436ca66b45ada36e40cdc3ab33d8", "client_ip": "10.10.1.250", "method": "GET", "path": "/health", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "fe7b436ca66b45ada36e40cdc3ab33d8", "client_ip": "10.10.1.250", "method": "GET", "path": "/health", "status": 200, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.250:34348 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:06:53.625502+00:00", "request_id": "sg-p-01-f9d9194ba78d", "client_ip": "10.10.1.11", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-01-f9d9194ba78d", "client_ip": "10.10.1.11", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 34.388341002340894}
+INFO:     10.10.1.11:54822 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:03.377409+00:00", "request_id": "sg-p-02-ca9b5a36e620", "client_ip": "10.10.1.12", "method": "POST", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-02-ca9b5a36e620", "client_ip": "10.10.1.12", "method": "POST", "path": "/api/info", "status": 405, "upstream_result": "ok", "upstream_latency_ms": 15.769582998473197}
+INFO:     10.10.1.12:59450 - "POST /api/info HTTP/1.1" 405 Method Not Allowed
+{"timestamp": "2026-11-23T03:07:09.580295+00:00", "request_id": "sg-p-03-36c86255c5df", "client_ip": "10.10.1.13", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "missing_token", "status": 401, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-03-36c86255c5df", "client_ip": "10.10.1.13", "method": "GET", "path": "/api/info", "status": 401, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.13:42076 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-23T03:07:14.944367+00:00", "request_id": "sg-p-04-85d91ae66b13", "client_ip": "10.10.1.14", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-04-85d91ae66b13", "client_ip": "10.10.1.14", "method": "GET", "path": "/api/info", "status": 401, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.14:52048 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-23T03:07:19.744396+00:00", "request_id": "sg-p-05-72c61f124c35", "client_ip": "10.10.1.15", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "insufficient_scope", "status": 403, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-05-72c61f124c35", "client_ip": "10.10.1.15", "method": "GET", "path": "/api/info", "status": 403, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.15:55684 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-23T03:07:24.350545+00:00", "request_id": "sg-p-06-391e1dc9d621", "client_ip": "10.10.1.16", "method": "GET", "path": "/api/../info", "decision": "reject", "reason": "bad_path", "status": 400, "score_before": 0.0, "score_after": 10.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p-06-391e1dc9d621", "client_ip": "10.10.1.16", "method": "GET", "path": "/[redacted]", "status": 400, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.16:39162 - "GET /api/../info HTTP/1.1" 400 Bad Request
+{"timestamp": "2026-11-23T03:07:29.185822+00:00", "request_id": "sg-p07-ae635e29f0a5", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-ae635e29f0a5", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 29.654805999598466}
+INFO:     10.10.1.17:42606 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.263021+00:00", "request_id": "sg-p07-65f08c9085db", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-65f08c9085db", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 21.997755000484176}
+INFO:     10.10.1.17:42612 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.378460+00:00", "request_id": "sg-p07-4c324a2baaca", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-4c324a2baaca", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 17.447184996854048}
+INFO:     10.10.1.17:42628 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.436667+00:00", "request_id": "sg-p07-e821c6f1ea13", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-e821c6f1ea13", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 8.551343002181966}
+INFO:     10.10.1.17:42638 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.459126+00:00", "request_id": "sg-p07-776c0a4b130c", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-776c0a4b130c", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 6.63465699471999}
+INFO:     10.10.1.17:42642 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.479035+00:00", "request_id": "sg-p07-1c1b09931c60", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-1c1b09931c60", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 6.87215500511229}
+INFO:     10.10.1.17:42650 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.499328+00:00", "request_id": "sg-p07-52a9666602b6", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-52a9666602b6", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 7.363251999777276}
+INFO:     10.10.1.17:42660 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.520700+00:00", "request_id": "sg-p07-5f5ba87d654f", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-5f5ba87d654f", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 11.251425996306352}
+INFO:     10.10.1.17:42668 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.557436+00:00", "request_id": "sg-p07-7afdb5253601", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-7afdb5253601", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 15.684596997743938}
+INFO:     10.10.1.17:42672 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.599315+00:00", "request_id": "sg-p07-e10d2b0f8e92", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-e10d2b0f8e92", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 11.442625000199769}
+INFO:     10.10.1.17:42682 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.636820+00:00", "request_id": "sg-p07-dee2f39b5e6b", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-dee2f39b5e6b", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 12.752317001286428}
+INFO:     10.10.1.17:42696 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.685177+00:00", "request_id": "sg-p07-22f5871f2219", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-22f5871f2219", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 20.845464001467917}
+INFO:     10.10.1.17:42704 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.751995+00:00", "request_id": "sg-p07-00dc43813b31", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-00dc43813b31", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 12.201820005429909}
+INFO:     10.10.1.17:42712 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.799463+00:00", "request_id": "sg-p07-a6ad2fd4d910", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-a6ad2fd4d910", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 23.080248000042047}
+INFO:     10.10.1.17:42728 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.868707+00:00", "request_id": "sg-p07-714efd51be0c", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-714efd51be0c", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 18.979775995831005}
+INFO:     10.10.1.17:42738 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.934769+00:00", "request_id": "sg-p07-bd14c66f7f8d", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-bd14c66f7f8d", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 12.193320006190334}
+INFO:     10.10.1.17:42750 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:29.972824+00:00", "request_id": "sg-p07-2e3e5706613e", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-2e3e5706613e", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 12.259818999154959}
+INFO:     10.10.1.17:42760 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:30.011194+00:00", "request_id": "sg-p07-ea651a08c092", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-ea651a08c092", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 15.551398006209638}
+INFO:     10.10.1.17:42762 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:30.060137+00:00", "request_id": "sg-p07-93cc13720cb5", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-93cc13720cb5", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 14.99470199632924}
+INFO:     10.10.1.17:42776 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:30.103070+00:00", "request_id": "sg-p07-05f585c1f3a8", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-05f585c1f3a8", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 15.375399001641199}
+INFO:     10.10.1.17:42784 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:30.146577+00:00", "request_id": "sg-p07-5169986db13b", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "rate_limited", "status": 429, "score_before": 0.0, "score_after": 5.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p07-5169986db13b", "client_ip": "10.10.1.17", "method": "GET", "path": "/api/info", "status": 429, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.17:42790 - "GET /api/info HTTP/1.1" 429 Too Many Requests
+{"timestamp": "2026-11-23T03:07:34.866179+00:00", "request_id": "sg-ban-b96b29622dd6", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 0.0, "score_after": 20.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-ban-b96b29622dd6", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "status": 401, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.18:49396 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-23T03:07:34.912457+00:00", "request_id": "sg-ban-09db84c7f4dd", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 19.97716071149989, "score_after": 39.97716071149989, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-ban-09db84c7f4dd", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "status": 401, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.18:49410 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-23T03:07:34.960774+00:00", "request_id": "sg-ban-4f844541397e", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "bad_signature", "status": 401, "score_before": 39.95333346150073, "score_after": 59.95333346150073, "tier": "elevated", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-ban-4f844541397e", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "status": 401, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.18:49414 - "GET /api/info HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-11-23T03:07:35.006772+00:00", "request_id": "sg-ban-35e4202478e4", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 59.93065133300115, "score_after": 79.93065133300115, "tier": "banned", "ban_remaining": 30}
+{"event": "final_outcome", "request_id": "sg-ban-35e4202478e4", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "status": 403, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.18:49430 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-23T03:07:35.299301+00:00", "request_id": "sg-p08-a4964c3df701", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "decision": "reject", "reason": "banned", "status": 403, "score_before": 79.93065133300115, "score_after": 79.93065133300115, "tier": "banned", "ban_remaining": 30}
+{"event": "final_outcome", "request_id": "sg-p08-a4964c3df701", "client_ip": "10.10.1.18", "method": "GET", "path": "/api/info", "status": 403, "upstream_result": "not_forwarded", "upstream_latency_ms": null}
+INFO:     10.10.1.18:49438 - "GET /api/info HTTP/1.1" 403 Forbidden
+{"timestamp": "2026-11-23T03:07:44.682037+00:00", "request_id": "sg-p10-c4f24281a035", "client_ip": "10.10.1.20", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p10-c4f24281a035", "client_ip": "10.10.1.20", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 10.362734996306244}
+INFO:     10.10.1.20:59756 - "GET /api/info HTTP/1.1" 200 OK
+{"timestamp": "2026-11-23T03:07:44.697459+00:00", "request_id": "sg-p10-c4f24281a035", "client_ip": "10.10.1.20", "method": "GET", "path": "/api/info", "decision": "allow", "reason": "allowed", "status": 200, "score_before": 0.0, "score_after": 0.0, "tier": "normal", "ban_remaining": 0}
+{"event": "final_outcome", "request_id": "sg-p10-c4f24281a035", "client_ip": "10.10.1.20", "method": "GET", "path": "/api/info", "status": 200, "upstream_result": "ok", "upstream_latency_ms": 7.070102001307532}
+INFO:     10.10.1.20:59756 - "GET /api/info HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [166]

@@ -1,0 +1,46 @@
+UTC: 2026-11-23T03:07:35.025899+00:00
+COMMAND: four bad signature curl requests to trigger ban
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.18 --max-time 8 --silent --show-error --include --path-as-is --header 'X-Request-ID: sg-ban-b96b29622dd6' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 401 Unauthorized
+date: Mon, 23 Nov 2026 03:07:34 GMT
+server: uvicorn
+www-authenticate: Bearer
+content-length: 60
+content-type: application/json
+x-request-id: sg-ban-b96b29622dd6
+
+{"error":"bad_signature","request_id":"sg-ban-b96b29622dd6"}
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.18 --max-time 8 --silent --show-error --include --path-as-is --header 'X-Request-ID: sg-ban-09db84c7f4dd' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 401 Unauthorized
+date: Mon, 23 Nov 2026 03:07:34 GMT
+server: uvicorn
+www-authenticate: Bearer
+content-length: 60
+content-type: application/json
+x-request-id: sg-ban-09db84c7f4dd
+
+{"error":"bad_signature","request_id":"sg-ban-09db84c7f4dd"}
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.18 --max-time 8 --silent --show-error --include --path-as-is --header 'X-Request-ID: sg-ban-4f844541397e' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 401 Unauthorized
+date: Mon, 23 Nov 2026 03:07:34 GMT
+server: uvicorn
+www-authenticate: Bearer
+content-length: 60
+content-type: application/json
+x-request-id: sg-ban-4f844541397e
+
+{"error":"bad_signature","request_id":"sg-ban-4f844541397e"}
+COMMAND: ip netns exec sg-client curl --noproxy '*' --interface 10.10.1.18 --max-time 8 --silent --show-error --include --path-as-is --header 'X-Request-ID: sg-ban-35e4202478e4' --header 'Authorization: Bearer $LAB_TOKEN' http://10.10.3.10:8000/api/info
+EXIT: 0
+HTTP/1.1 403 Forbidden
+date: Mon, 23 Nov 2026 03:07:34 GMT
+server: uvicorn
+retry-after: 30
+content-length: 53
+content-type: application/json
+x-request-id: sg-ban-35e4202478e4
+
+{"error":"banned","request_id":"sg-ban-35e4202478e4"}

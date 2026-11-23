@@ -1,0 +1,174 @@
+UTC: 2026-11-21T21:59:14.441756+00:00
+COMMAND: ip netns exec sg-client ip -br addr
+EXIT: 0
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+sg-c0@if2        UP             10.10.1.10/24 10.10.1.11/24 10.10.1.12/24 10.10.1.13/24 10.10.1.14/24 10.10.1.15/24 10.10.1.16/24 10.10.1.17/24 10.10.1.18/24 10.10.1.19/24 10.10.1.20/24 10.10.1.21/24 10.10.1.22/24 10.10.1.23/24 10.10.1.24/24 10.10.1.25/24 10.10.1.250/24 fe80::a0e0:bfff:fe8d:61f/64 
+
+COMMAND: ip netns exec sg-client ip route
+EXIT: 0
+default via 10.10.1.1 dev sg-c0 
+10.10.1.0/24 dev sg-c0 proto kernel scope link src 10.10.1.10 
+
+COMMAND: ip netns exec sg-client ip rule
+EXIT: 0
+0:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+
+COMMAND: ip netns exec sg-client sysctl net.ipv4.ip_forward
+EXIT: 0
+net.ipv4.ip_forward = 0
+
+COMMAND: ip netns exec sg-client ip neigh
+EXIT: 0
+10.10.1.1 dev sg-c0 lladdr 06:62:90:39:a8:fc REACHABLE 
+
+COMMAND: ip netns exec sg-r1 ip -br addr
+EXIT: 0
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+sg-r10@if3       UP             10.10.1.1/24 fe80::462:90ff:fe39:a8fc/64 
+sg-r11@if4       UP             10.10.2.1/24 fe80::3440:d3ff:feda:a95f/64 
+
+COMMAND: ip netns exec sg-r1 ip route
+EXIT: 0
+10.10.1.0/24 dev sg-r10 proto kernel scope link src 10.10.1.1 
+10.10.2.0/24 dev sg-r11 proto kernel scope link src 10.10.2.1 
+10.10.3.0/24 via 10.10.2.2 dev sg-r11 
+
+COMMAND: ip netns exec sg-r1 ip rule
+EXIT: 0
+0:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+
+COMMAND: ip netns exec sg-r1 sysctl net.ipv4.ip_forward
+EXIT: 0
+net.ipv4.ip_forward = 1
+
+COMMAND: ip netns exec sg-r1 ip neigh
+EXIT: 0
+10.10.1.19 dev sg-r10 lladdr a2:e0:bf:8d:06:1f REACHABLE 
+10.10.1.13 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.2.2 dev sg-r11 lladdr 3a:2b:1e:ab:54:57 REACHABLE 
+10.10.1.18 dev sg-r10 lladdr a2:e0:bf:8d:06:1f REACHABLE 
+10.10.1.12 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.17 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.11 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.250 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.16 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.15 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+10.10.1.20 dev sg-r10 lladdr a2:e0:bf:8d:06:1f REACHABLE 
+10.10.1.14 dev sg-r10 lladdr a2:e0:bf:8d:06:1f STALE 
+
+COMMAND: ip netns exec sg-r2 ip -br addr
+EXIT: 0
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+sg-r20@if5       UP             10.10.2.2/24 fe80::382b:1eff:feab:5457/64 
+sg-r21@if6       UP             10.10.3.1/24 fe80::f09e:dff:fee1:9a93/64 
+
+COMMAND: ip netns exec sg-r2 ip route
+EXIT: 0
+10.10.1.0/24 via 10.10.2.1 dev sg-r20 
+10.10.2.0/24 dev sg-r20 proto kernel scope link src 10.10.2.2 
+10.10.3.0/24 dev sg-r21 proto kernel scope link src 10.10.3.1 
+
+COMMAND: ip netns exec sg-r2 ip rule
+EXIT: 0
+0:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+
+COMMAND: ip netns exec sg-r2 sysctl net.ipv4.ip_forward
+EXIT: 0
+net.ipv4.ip_forward = 1
+
+COMMAND: ip netns exec sg-r2 ip neigh
+EXIT: 0
+10.10.2.1 dev sg-r20 lladdr 36:40:d3:da:a9:5f REACHABLE 
+10.10.3.10 dev sg-r21 lladdr 86:dc:e8:cb:ad:92 REACHABLE 
+
+COMMAND: ip netns exec sg-gateway ip -br addr
+EXIT: 0
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+sg-g0@if7        UP             10.10.3.10/24 fe80::84dc:e8ff:fecb:ad92/64 
+sg-g1@if8        UP             10.10.4.1/24 fe80::9050:69ff:fe10:4b53/64 
+
+COMMAND: ip netns exec sg-gateway ip route
+EXIT: 0
+10.10.1.0/24 via 10.10.3.1 dev sg-g0 
+10.10.3.0/24 dev sg-g0 proto kernel scope link src 10.10.3.10 
+10.10.4.0/24 dev sg-g1 proto kernel scope link src 10.10.4.1 
+
+COMMAND: ip netns exec sg-gateway ip rule
+EXIT: 0
+0:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+
+COMMAND: ip netns exec sg-gateway sysctl net.ipv4.ip_forward
+EXIT: 0
+net.ipv4.ip_forward = 0
+
+COMMAND: ip netns exec sg-gateway ip neigh
+EXIT: 0
+10.10.4.10 dev sg-g1 lladdr ae:70:11:5d:b5:57 REACHABLE 
+10.10.3.1 dev sg-g0 lladdr f2:9e:0d:e1:9a:93 REACHABLE 
+
+COMMAND: ip netns exec sg-backend ip -br addr
+EXIT: 0
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+sg-b0@if9        UP             10.10.4.10/24 fe80::ac70:11ff:fe5d:b557/64 
+
+COMMAND: ip netns exec sg-backend ip route
+EXIT: 0
+default via 10.10.4.1 dev sg-b0 
+10.10.4.0/24 dev sg-b0 proto kernel scope link src 10.10.4.10 
+
+COMMAND: ip netns exec sg-backend ip rule
+EXIT: 0
+0:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+
+COMMAND: ip netns exec sg-backend sysctl net.ipv4.ip_forward
+EXIT: 0
+net.ipv4.ip_forward = 0
+
+COMMAND: ip netns exec sg-backend ip neigh
+EXIT: 0
+10.10.4.1 dev sg-b0 lladdr 92:50:69:10:4b:53 REACHABLE 
+
+COMMAND: ip netns exec sg-client ip route get 10.10.3.10
+EXIT: 0
+10.10.3.10 via 10.10.1.1 dev sg-c0 src 10.10.1.10 uid 0 
+    cache 
+
+COMMAND: ip netns exec sg-client ip route get 10.10.4.10
+EXIT: 0
+10.10.4.10 via 10.10.1.1 dev sg-c0 src 10.10.1.10 uid 0 
+    cache 
+
+COMMAND: ip netns exec sg-client ping -c 2 -W 2 10.10.3.10
+EXIT: 0
+PING 10.10.3.10 (10.10.3.10) 56(84) bytes of data.
+64 bytes from 10.10.3.10: icmp_seq=1 ttl=62 time=0.368 ms
+64 bytes from 10.10.3.10: icmp_seq=2 ttl=62 time=0.135 ms
+
+--- 10.10.3.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1027ms
+rtt min/avg/max/mdev = 0.135/0.251/0.368/0.116 ms
+
+COMMAND: ip netns exec sg-client traceroute -n -q 1 -w 1 10.10.3.10
+EXIT: 0
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  3.831 ms
+ 2  10.10.2.2  0.303 ms
+ 3  10.10.3.10  0.056 ms
+
+COMMAND: ip netns exec sg-client traceroute -I -n -q 1 -w 1 10.10.3.10
+EXIT: 0
+traceroute to 10.10.3.10 (10.10.3.10), 30 hops max, 60 byte packets
+ 1  10.10.1.1  0.081 ms
+ 2  10.10.2.2  0.034 ms
+ 3  10.10.3.10  0.029 ms
+

@@ -1,0 +1,30 @@
+UTC: 2026-11-23T03:07:51.386017+00:00
+COMMAND: python scripts/stage5_analyze.py evidence/captures/stage5/20261123T030641Z
+DERIVED FROM CAPTURE SUMMARIES
+check,result,details
+full frame lengths,PASS,truncated: []
+kernel and capture drops,PASS,nonzero or unavailable: []
+P-01 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 9]"
+P-02 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 13]"
+P-03 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 0]"
+P-04 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 0]"
+P-05 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 0]"
+P-06 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 0]"
+P-07 P1-P3 packets,PASS,"P1/P2/P3/P4=[252, 252, 252, 89]"
+P-08 P1-P3 packets,PASS,"P1/P2/P3/P4=[12, 12, 12, 0]"
+P-09 P1-P3 packets,PASS,"P1/P2/P3/P4=[4, 0, 0, 0]"
+P-10 P1-P3 packets,PASS,"P1/P2/P3/P4=[16, 16, 16, 15]"
+P-01 TTL ladder,PASS,"P1/P2/P3/P4: ['64', '63', '62', '64']"
+P-01 request ID,PASS,common ['sg-p-01-f9d9194ba78d']
+proxy boundary,PASS,P1 10.10.1.11:54822 -> 10.10.3.10:8000 stream 0; P4 10.10.4.1:47063 -> 10.10.4.10:9000 stream 0; stream IDs are local
+forwarded identity,PASS,P4 request 4
+backend Authorization,PASS,P4 request 4
+P-03 rejected ID absent at P4,PASS,request IDs ['sg-p-03-36c86255c5df']; P4 captured packets 0; HTTP ID match []
+P-04 rejected ID absent at P4,PASS,request IDs ['sg-p-04-85d91ae66b13']; P4 captured packets 0; HTTP ID match []
+P-05 rejected ID absent at P4,PASS,request IDs ['sg-p-05-72c61f124c35']; P4 captured packets 0; HTTP ID match []
+P-06 rejected ID absent at P4,PASS,request IDs ['sg-p-06-391e1dc9d621']; P4 captured packets 0; HTTP ID match []
+P-07 rejected ID absent at P4,PASS,request IDs ['sg-p07-5169986db13b']; P4 captured packets 89; HTTP ID match []
+P-08 rejected ID absent at P4,PASS,request IDs ['sg-p08-a4964c3df701']; P4 captured packets 0; HTTP ID match []
+no client IP at P4,PASS,[]
+P-09 ICMP unreachable,PASS,"[('2', '10.10.1.1,10.10.1.19', '3,8', '0,0'), ('4', '10.10.1.1,10.10.1.19', '3', '0')]"
+P-10 upstream reuse,PASS,"upstream request frames/streams [('6', '1', '43409'), ('12', '1', '43409')]"
